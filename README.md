@@ -1,2 +1,8 @@
 # NanoCron-v2
-version 2 not published. temp
+Install:
+
+git clone
+cd nanoCron
+sudo ./install.sh
+
+Start CLI: nanoCronCLI
