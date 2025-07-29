@@ -1,0 +1,28 @@
+[2025-07-28 19:43:33.244] [INFO] === NANOCRON SYSTEM STARTED ===
+[2025-07-28 19:43:33.247] [INFO] Loaded 3 jobs:
+[2025-07-28 19:43:33.247] [INFO] Job: /var/www/app/Cpp/MyCron/Jobs/closeSessionJob (Daily session cleanup)
+  Time: 23:00
+  Frequency: Every day
+[2025-07-28 19:43:33.248] [INFO] Job: /var/www/app/Cpp/MyCron/Jobs/makeAttendanceJob (Monthly XML generation)
+  Time: 5:00
+  Frequency: Day 1 of every month
+[2025-07-28 19:43:33.248] [INFO] Job: /var/www/app/Cpp/MyCron/Jobs/makeReportJob (Monthly PDF generation)
+  Time: 1:00
+  Frequency: Day 1 of every month
+[2025-07-28 19:43:33.249] [INFO] ===================================
+[2025-07-29 00:04:41.935] [INFO] === NANOCRON DAEMON STARTED ===
+[2025-07-29 00:04:41.958] [INFO] Loaded 3 jobs
+[2025-07-29 00:04:41.958] [INFO] Job: Daily session cleanup [/var/www/app/Cpp/MyCron/Jobs/closeSessionJob]
+[2025-07-29 00:04:41.958] [INFO] Job: Monthly XML generation [/var/www/app/Cpp/MyCron/Jobs/makeAttendanceJob]
+[2025-07-29 00:04:41.958] [INFO] Job: Monthly PDF generation [/var/www/app/Cpp/MyCron/Jobs/makeReportJob]
+[2025-07-29 00:04:41.958] [DEBUG] Current time: 0:04 - Tuesday 29/7/2025 - System running normally
+[2025-07-29 13:19:05.570] [INFO] === NANOCRON DAEMON STARTED ===
+[2025-07-29 13:19:05.578] [INFO] Loaded 6 jobs
+[2025-07-29 13:19:05.578] [INFO] Job: Daily session cleanup [/var/www/app/Cpp/MyCron/Jobs/closeSessionJob]
+[2025-07-29 13:19:05.578] [INFO] Job: Daily session cleanup [/var/www/app/Cpp/MyCron/Jobs/closeSessionJob]
+[2025-07-29 13:19:05.578] [INFO] Job: Monthly XML generation [/var/www/app/Cpp/MyCron/Jobs/makeAttendanceJob]
+[2025-07-29 13:19:05.579] [INFO] Job: Monthly PDF generation [/var/www/app/Cpp/MyCron/Jobs/makeReportJob]
+[2025-07-29 13:19:05.579] [INFO] Job: Monthly PDF generation [/var/www/app/Cpp/MyCron/Jobs/makeReportJob]
+[2025-07-29 13:19:05.579] [INFO] Job: CPU usage check every 5 minutes [/usr/local/bin/check_cpu.sh --threshold 90]
+[2025-07-29 13:19:05.579] [INFO] [CPU usage check every 5 minutes] Starting job: /usr/local/bin/check_cpu.sh --threshold 90
+[2025-07-29 13:19:05.609] [ERROR] [CPU usage check every 5 minutes] Job failed with exit code 127 after 0 seconds

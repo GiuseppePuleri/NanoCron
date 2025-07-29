@@ -1,0 +1,14 @@
+[Unit]
+Description=nanoCron - Cron personalizzato in C++
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/nanoCron
+WorkingDirectory=/usr/local/bin
+Restart=always
+StandardOutput=journal
+StandardError=journal
+EnvironmentFile=/opt/nanoCron/init/config.env
+
+[Install]
+WantedBy=multi-user.target
