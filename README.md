@@ -23,8 +23,8 @@
 
 NanoCron is implemented in modern C++ (C++17) with an emphasis on safety, efficiency, and extensibility.
 
-Website:
-Video Tutorial:
+- Website: https://nanocron.puleri.it
+- Video Tutorial:
 
 ---
 
