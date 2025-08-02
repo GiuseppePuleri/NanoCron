@@ -42,7 +42,7 @@ fi
 # Compilation Step:
 # Compile `nanoCron.cpp` with all components, including new ConfigWatcher
 echo "[nanoCron] Compiling nanoCron.cpp with auto-reload support..."
-g++ -O2 -pthread -I"$PROJECT_ROOT/components" \
+g++ -O2 -pthread -Wno-unused-result -I"$PROJECT_ROOT/components" \
     "$PROJECT_ROOT/nanoCron.cpp" \
     "$PROJECT_ROOT/components/Logger.cpp" \
     "$PROJECT_ROOT/components/JobConfig.cpp" \
