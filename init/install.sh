@@ -15,6 +15,14 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 # ------------------------------------------------------------------------------
+# Determine correct paths based on script location
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
+
+echo "[nanoCron] Script directory: $SCRIPT_DIR"
+echo "[nanoCron] Project root: $PROJECT_ROOT"
+
+# ------------------------------------------------------------------------------
 # g++ Compiler Check:
 # Verify if g++ is available in the system.
 # If missing, update package index and install g++ using apt-get.
@@ -34,17 +42,17 @@ fi
 # Compilation Step:
 # Compile `nanoCron.cpp` with all components, including new ConfigWatcher
 echo "[nanoCron] Compiling nanoCron.cpp with auto-reload support..."
-g++ -O2 -pthread -I../components \
-    ../nanoCron.cpp \
-    ../components/Logger.cpp \
-    ../components/JobConfig.cpp \
-    ../components/CronEngine.cpp \
-    ../components/JobExecutor.cpp \
-    ../components/ConfigWatcher.cpp \
+g++ -O2 -pthread -I"$PROJECT_ROOT/components" \
+    "$PROJECT_ROOT/nanoCron.cpp" \
+    "$PROJECT_ROOT/components/Logger.cpp" \
+    "$PROJECT_ROOT/components/JobConfig.cpp" \
+    "$PROJECT_ROOT/components/CronEngine.cpp" \
+    "$PROJECT_ROOT/components/JobExecutor.cpp" \
+    "$PROJECT_ROOT/components/ConfigWatcher.cpp" \
     -o /usr/local/bin/nanoCron
 
 echo "[nanoCron] Compiling nanoCronCLI..."
-g++ -O2 ../nanoCronCLI.cpp -o /usr/local/bin/nanoCronCLI
+g++ -O2 "$PROJECT_ROOT/nanoCronCLI.cpp" -o /usr/local/bin/nanoCronCLI
 
 # ------------------------------------------------------------------------------
 # Create Configuration Directory:
@@ -57,29 +65,28 @@ sudo mkdir -p /opt/nanoCron/init
 # ------------------------------------------------------------------------------
 # Create Clean Configuration File:
 echo "[nanoCron] Creating clean config.env with paths..."
-INSTALL_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 # Create clean config.env with all paths
-cat > ./config.env << EOF
+cat > "$SCRIPT_DIR/config.env" << EOF
 CRON_INTERVAL_SECONDS=60
 LOG_PATH=/var/log/nanoCron.log
-ORIGINAL_JOBS_JSON_PATH=$INSTALL_DIR/jobs.json
-ORIGINAL_CRON_LOG_PATH=$INSTALL_DIR/logs/cron.log
+ORIGINAL_JOBS_JSON_PATH=$SCRIPT_DIR/jobs.json
+ORIGINAL_CRON_LOG_PATH=$SCRIPT_DIR/logs/cron.log
 EOF
 
 # Copy to system location
 echo "[nanoCron] Copying config.env to /opt/nanoCron/init/..."
-cp ./config.env /opt/nanoCron/init/config.env
+cp "$SCRIPT_DIR/config.env" /opt/nanoCron/init/config.env
 
 # Create logs directory if it doesn't exist
 echo "[nanoCron] Creating logs directory..."
-mkdir -p $INSTALL_DIR/logs
+mkdir -p "$SCRIPT_DIR/logs"
 
 # ------------------------------------------------------------------------------
 # Install Systemd Service:
 # Copy the service unit file to systemd's directory so it can manage the daemon.
 echo "[nanoCron] Installing systemd service..."
-cp ./nanoCron.service /etc/systemd/system/nanoCron.service
+cp "$SCRIPT_DIR/nanoCron.service" /etc/systemd/system/nanoCron.service
 
 # ------------------------------------------------------------------------------
 # Enable and Start Service:

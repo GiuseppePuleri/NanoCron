@@ -1,146 +1,114 @@
 /**
  * @file JobConfig.cpp
- * @brief JSON-based cron job configuration parser with performance optimizations
- * 
- * Handles loading, parsing, validation, and saving of cron job configurations
- * from JSON files. Includes move semantics optimizations and comprehensive
- * validation for robust configuration management.
+ * @brief JSON-based job configuration management with validation
  */
 
 #include "JobConfig.h"
 #include "json.hpp"
 #include <fstream>
 #include <iostream>
-#include <map>
-
-using json = nlohmann::json;
+#include <filesystem>
 
 /**
- * Loads and parses cron jobs from JSON file
- * @param filename Path to JSON configuration file
- * @return Vector of parsed CronJob objects, empty on failure
+ * Load jobs from JSON configuration file
  */
 std::vector<CronJob> JobConfig::loadJobs(const std::string& filename) {
     std::ifstream file(filename);
     if (!file.is_open()) {
-        std::cerr << "Invalid jobs file" << std::endl;
+        std::cerr << "Error: Cannot open config file: " << filename << std::endl;
         return {};
     }
     
     try {
-        json j;
+        nlohmann::json j;
         file >> j;
-        file.close();
-        
-        // OPTIMIZATION: Direct parsing without string conversion intermediate step
         return parseJobsFromJson(std::move(j));
+    } catch (const nlohmann::json::parse_error& e) {
+        std::cerr << "JSON parse error in " << filename << ": " << e.what() << std::endl;
+        return {};
     } catch (const std::exception& e) {
-        std::cerr << "Error parsing JSON: " << e.what() << std::endl;
-        std::cerr << "Using fallback configuration..." << std::endl;
-        file.close();
-        std::cerr << "Invalid jobs file" << std::endl;
+        std::cerr << "Error loading jobs from " << filename << ": " << e.what() << std::endl;
         return {};
     }
 }
 
 /**
- * NEW: Direct parsing from nlohmann::json object (overload)
- * @param j JSON object to parse (moved for efficiency)
- * @return Vector of parsed CronJob objects
- * @note Uses move semantics throughout for optimal performance
+ * OTTIMIZZATO: Parse direttamente da nlohmann::json object (move semantics)
+ * Evita doppio parsing JSON -> string -> JSON
  */
-std::vector<CronJob> JobConfig::parseJobsFromJson(json&& j) {
+std::vector<CronJob> JobConfig::parseJobsFromJson(nlohmann::json&& j) {
     std::vector<CronJob> jobs;
     
+    if (!j.contains("jobs") || !j["jobs"].is_array()) {
+        std::cerr << "Error: JSON must contain 'jobs' array" << std::endl;
+        return {};
+    }
+    
     try {
-        // Validate JSON structure contains required 'jobs' array
-        if (!j.contains("jobs") || !j["jobs"].is_array()) {
-            throw std::runtime_error("JSON must contain 'jobs' array");
-        }
-        
-        const auto& jobs_array = j["jobs"];
-        
-        // OPTIMIZATION 1: Pre-allocate vector capacity to avoid reallocations
-        jobs.reserve(jobs_array.size());
-        
-        // Parse each job definition
-        for (auto&& job_json : jobs_array) {  // OPTIMIZATION 2: Universal reference for move
+        for (const auto& job_json : j["jobs"]) {
             CronJob job;
             
-            // OPTIMIZATION 3: Move semantics for string fields to avoid copies
-            // Parse required fields with validation
-            if (job_json.contains("description") && job_json["description"].is_string()) {
-                job.description = std::move(job_json["description"].get_ref<std::string&>());
-            } else {
-                throw std::runtime_error("Job missing required 'description' field");
+            // Required fields
+            if (!job_json.contains("description") || !job_json.contains("command")) {
+                std::cerr << "Warning: Skipping job missing required fields (description, command)" << std::endl;
+                continue;
             }
             
-            if (job_json.contains("command") && job_json["command"].is_string()) {
-                job.command = std::move(job_json["command"].get_ref<std::string&>());
+            job.description = job_json["description"].get<std::string>();
+            job.command = job_json["command"].get<std::string>();
+            
+            // Schedule parsing (new unified format)
+            if (job_json.contains("schedule")) {
+                const auto& sched = job_json["schedule"];
+                
+                // Support both string format ("0 9 * * 1-5") and object format
+                if (sched.is_string()) {
+                    // Parse cron string format
+                    parseScheduleFromString(job, sched.get<std::string>());
+                } else if (sched.is_object()) {
+                    // Parse object format
+                    job.schedule.minute = sched.value("minute", "*");
+                    job.schedule.hour = sched.value("hour", "*");
+                    job.schedule.day_of_month = sched.value("day_of_month", "*");
+                    job.schedule.month = sched.value("month", "*");
+                    job.schedule.day_of_week = sched.value("day_of_week", "*");
+                }
+                
+                // Convert to legacy format for backward compatibility
+                parseScheduleToLegacyFormat(job);
             } else {
-                throw std::runtime_error("Job missing required 'command' field");
+                // Legacy format fallback
+                job.hour = job_json.value("hour", -1);
+                job.minute = job_json.value("minute", -1);
+                job.day_param = job_json.value("day", -1);
+                job.month_param = job_json.value("month", -1);
+                
+                // Convert legacy to new schedule format
+                convertLegacyToSchedule(job);
             }
             
-            // Parse cron schedule specification with move semantics
-            if (job_json.contains("schedule") && job_json["schedule"].is_object()) {
-                auto& schedule = job_json["schedule"];
+            // Job conditions (optional)
+            if (job_json.contains("conditions")) {
+                const auto& cond = job_json["conditions"];
+                job.conditions.cpu_threshold = cond.value("cpu_threshold", "");
+                job.conditions.ram_threshold = cond.value("ram_threshold", "");
+                job.conditions.loadavg_threshold = cond.value("loadavg_threshold", "");
                 
-                // OPTIMIZATION 4: Move semantics for schedule fields (avoid string copies)
-                job.schedule.minute = schedule.contains("minute") ? 
-                    std::move(schedule["minute"].get_ref<std::string&>()) : "*";
-                job.schedule.hour = schedule.contains("hour") ? 
-                    std::move(schedule["hour"].get_ref<std::string&>()) : "*";
-                job.schedule.day_of_month = schedule.contains("day_of_month") ? 
-                    std::move(schedule["day_of_month"].get_ref<std::string&>()) : "*";
-                job.schedule.month = schedule.contains("month") ? 
-                    std::move(schedule["month"].get_ref<std::string&>()) : "*";
-                job.schedule.day_of_week = schedule.contains("day_of_week") ? 
-                    std::move(schedule["day_of_week"].get_ref<std::string&>()) : "*";
-            } else {
-                throw std::runtime_error("Job missing required 'schedule' object");
-            }
-            
-            // Parse optional execution conditions with move semantics
-            if (job_json.contains("conditions") && job_json["conditions"].is_object()) {
-                auto& conditions = job_json["conditions"];
-                
-                // OPTIMIZATION 5: Move semantics for condition thresholds
-                if (conditions.contains("cpu")) {
-                    job.conditions.cpu_threshold = std::move(conditions["cpu"].get_ref<std::string&>());
-                }
-                if (conditions.contains("ram")) {
-                    job.conditions.ram_threshold = std::move(conditions["ram"].get_ref<std::string&>());
-                }
-                if (conditions.contains("loadavg")) {
-                    job.conditions.loadavg_threshold = std::move(conditions["loadavg"].get_ref<std::string&>());
-                }
-                
-                // Parse disk space conditions with move semantics
-                if (conditions.contains("disk") && conditions["disk"].is_object()) {
-                    for (auto&& [path, threshold] : conditions["disk"].items()) {
-                        job.conditions.disk_thresholds[std::move(path)] = std::move(threshold.get_ref<std::string&>());
+                // Parse disk thresholds
+                if (cond.contains("disk_thresholds") && cond["disk_thresholds"].is_object()) {
+                    for (const auto& [path, threshold] : cond["disk_thresholds"].items()) {
+                        job.conditions.disk_thresholds[path] = threshold.get<std::string>();
                     }
                 }
             }
             
-            // Convert modern JSON schedule format to legacy internal representation
-            parseScheduleToLegacyFormat(job);
-            
-            // OPTIMIZATION 6: emplace_back instead of push_back (construct in-place)
-            jobs.emplace_back(std::move(job));
-            
-            std::cout << "Loaded job: " << jobs.back().description << " [" << jobs.back().command << "]" << std::endl;
+            // Only add if conditions are met
+            if (checkJobConditions(job.conditions)) {
+                jobs.push_back(job);
+            }
         }
-        
-    } catch (const std::exception& e) {
-        std::cerr << "JSON parsing error: " << e.what() << std::endl;
-        std::cerr << "Invalid jobs file" << std::endl;
-        return {};
-    }
-    
-    if (jobs.empty()) {
-        std::cerr << "No valid jobs found in JSON. Using fallback..." << std::endl;
-        std::cerr << "Invalid jobs file" << std::endl;
+    } catch (const nlohmann::json::exception& e) {
+        std::cerr << "Error parsing job configuration: " << e.what() << std::endl;
         return {};
     }
     
@@ -148,278 +116,120 @@ std::vector<CronJob> JobConfig::parseJobsFromJson(json&& j) {
 }
 
 /**
- * Legacy compatibility method - parses from JSON string
- * @param json_string JSON configuration as string
- * @return Vector of parsed CronJob objects
- * @note Maintained for backward compatibility, delegates to optimized version
+ * Parse JSON string and return jobs
  */
 std::vector<CronJob> JobConfig::parseJobsFromJson(const std::string& json_string) {
     try {
-        // OPTIMIZATION 7: Direct parsing without intermediate copy
-        json j = json::parse(json_string);
+        nlohmann::json j = nlohmann::json::parse(json_string);
         return parseJobsFromJson(std::move(j));
-    } catch (const std::exception& e) {
-        std::cerr << "JSON parsing error: " << e.what() << std::endl;
-        std::cerr << "Invalid jobs file" << std::endl;
+    } catch (const nlohmann::json::parse_error& e) {
+        std::cerr << "JSON parse error: " << e.what() << std::endl;
         return {};
     }
 }
 
 /**
- * Converts modern JSON schedule format to legacy internal representation
- * @param job CronJob object to populate with legacy fields
- * @note Handles cron expression parsing with validation and safe fallbacks
- */
-void JobConfig::parseScheduleToLegacyFormat(CronJob& job) {
-    // OPTIMIZATION 8: Cache common strings to avoid repeated string comparisons
-    static const std::string ASTERISK = "*";
-    static const std::string INTERVAL_PREFIX = "*/";
-    
-    // Parse minute field with validation
-    if (job.schedule.minute == ASTERISK) {
-        job.minute = -1; // Special value for "any minute"
-    } else if (job.schedule.minute.compare(0, INTERVAL_PREFIX.length(), INTERVAL_PREFIX) == 0) {
-        // Handle interval notation (*/X format for every X minutes)
-        job.minute = -2; // Special value for interval
-        // TODO: Store interval value for proper handling
-    } else {
-        // OPTIMIZATION 9: Fast integer parsing with comprehensive error handling
-        try {
-            job.minute = std::stoi(job.schedule.minute);
-            // Range validation for cron minute field (0-59)
-            if (job.minute < 0 || job.minute > 59) {
-                job.minute = 0; // Safe fallback
-            }
-        } catch (const std::exception&) {
-            job.minute = 0; // Default fallback for invalid input
-        }
-    }
-    
-    // Parse hour field with same optimization pattern
-    if (job.schedule.hour == ASTERISK) {
-        job.hour = -1; // Special value for "any hour"
-    } else {
-        try {
-            job.hour = std::stoi(job.schedule.hour);
-            // Range validation for cron hour field (0-23)
-            if (job.hour < 0 || job.hour > 23) {
-                job.hour = 0; // Safe fallback
-            }
-        } catch (const std::exception&) {
-            job.hour = 0; // Default fallback
-        }
-    }
-    
-    // OPTIMIZATION 10: Determine frequency with early returns (avoid unnecessary checks)
-    // Weekly frequency (day of week specified)
-    if (job.schedule.day_of_week != ASTERISK) {
-        job.frequency = CronFrequency::WEEKLY;
-        try {
-            job.day_param = std::stoi(job.schedule.day_of_week);
-            if (job.day_param < 0 || job.day_param > 6) {
-                job.day_param = 0; // Sunday as fallback
-            }
-        } catch (const std::exception&) {
-            job.day_param = 0;
-        }
-        return; // Early exit for performance
-    }
-    
-    // Monthly frequency (day of month specified)
-    if (job.schedule.day_of_month != ASTERISK) {
-        job.frequency = CronFrequency::MONTHLY;
-        try {
-            job.day_param = std::stoi(job.schedule.day_of_month);
-            if (job.day_param < 1 || job.day_param > 31) {
-                job.day_param = 1; // First day as fallback
-            }
-        } catch (const std::exception&) {
-            job.day_param = 1;
-        }
-        return; // Early exit
-    }
-    
-    // Yearly frequency (month specified)
-    if (job.schedule.month != ASTERISK) {
-        job.frequency = CronFrequency::YEARLY;
-        try {
-            job.day_param = std::stoi(job.schedule.day_of_month);
-            job.month_param = std::stoi(job.schedule.month);
-            // Validate date ranges
-            if (job.day_param < 1 || job.day_param > 31) job.day_param = 1;
-            if (job.month_param < 1 || job.month_param > 12) job.month_param = 1;
-        } catch (const std::exception&) {
-            job.day_param = 1;
-            job.month_param = 1;
-        }
-        return; // Early exit
-    }
-    
-    // Default case: daily frequency
-    job.frequency = CronFrequency::DAILY;
-    job.day_param = 0;
-    job.month_param = 0;
-}
-
-/**
- * Evaluates job execution conditions against current system state
- * @param conditions JobConditions object containing thresholds
- * @return true if all conditions are met for job execution
- * @note Currently returns true (stub implementation) - TODO: implement system monitoring
- */
-bool JobConfig::checkJobConditions(const JobConditions& conditions) {
-    // TODO: Implement comprehensive system condition checking
-    // This would check CPU usage, RAM consumption, disk space, load average, etc.
-    // For now, return true (always execute jobs)
-    
-    // Example implementation outline:
-    // - Parse threshold strings (e.g., ">90%", "<95%")
-    // - Get current system statistics via /proc filesystem
-    // - Compare current values with configured thresholds
-    // - Return false if any condition is not met
-    
-    return true;
-}
-
-/**
- * Saves job configuration to JSON file
- * @param jobs Vector of CronJob objects to serialize
- * @param filename Output file path
- * @return true if save operation successful
+ * Save jobs to JSON file with optimized structure
  */
 bool JobConfig::saveJobsToJson(const std::vector<CronJob>& jobs, const std::string& filename) {
     try {
-        json config;
-        config["jobs"] = json::array();
+        nlohmann::json config;
+        config["jobs"] = nlohmann::json::array();
         
-        // OPTIMIZATION 11: Reserve space in JSON array to avoid reallocations
-        config["jobs"].get_ref<json::array_t&>().reserve(jobs.size());
+        // Reserve space for better performance
+        config["jobs"].get_ref<nlohmann::json::array_t&>().reserve(jobs.size());
         
-        // Serialize each job to JSON format
-        for (const CronJob& job : jobs) {
-            json job_json;
+        for (const auto& job : jobs) {
+            nlohmann::json job_json;
             job_json["description"] = job.description;
             job_json["command"] = job.command;
             
-            // Serialize schedule specification
-            job_json["schedule"]["minute"] = job.schedule.minute;
-            job_json["schedule"]["hour"] = job.schedule.hour;
-            job_json["schedule"]["day_of_month"] = job.schedule.day_of_month;
-            job_json["schedule"]["month"] = job.schedule.month;
-            job_json["schedule"]["day_of_week"] = job.schedule.day_of_week;
+            // Use new schedule format
+            nlohmann::json schedule_json;
+            schedule_json["minute"] = job.schedule.minute;
+            schedule_json["hour"] = job.schedule.hour;
+            schedule_json["day_of_month"] = job.schedule.day_of_month;
+            schedule_json["month"] = job.schedule.month;
+            schedule_json["day_of_week"] = job.schedule.day_of_week;
+            job_json["schedule"] = schedule_json;
             
-            // Conditionally serialize conditions (reduce JSON size for empty conditions)
+            // Add conditions only if they're not default
             if (!job.conditions.cpu_threshold.empty() || 
                 !job.conditions.ram_threshold.empty() || 
-                !job.conditions.loadavg_threshold.empty() || 
+                !job.conditions.loadavg_threshold.empty() ||
                 !job.conditions.disk_thresholds.empty()) {
                 
-                job_json["conditions"] = json::object();
+                nlohmann::json conditions_json;
                 
-                if (!job.conditions.cpu_threshold.empty()) {
-                    job_json["conditions"]["cpu"] = job.conditions.cpu_threshold;
-                }
-                if (!job.conditions.ram_threshold.empty()) {
-                    job_json["conditions"]["ram"] = job.conditions.ram_threshold;
-                }
-                if (!job.conditions.loadavg_threshold.empty()) {
-                    job_json["conditions"]["loadavg"] = job.conditions.loadavg_threshold;
-                }
+                if (!job.conditions.cpu_threshold.empty())
+                    conditions_json["cpu_threshold"] = job.conditions.cpu_threshold;
+                if (!job.conditions.ram_threshold.empty())
+                    conditions_json["ram_threshold"] = job.conditions.ram_threshold;
+                if (!job.conditions.loadavg_threshold.empty())
+                    conditions_json["loadavg_threshold"] = job.conditions.loadavg_threshold;
+                
                 if (!job.conditions.disk_thresholds.empty()) {
-                    job_json["conditions"]["disk"] = job.conditions.disk_thresholds;
+                    nlohmann::json disk_json;
+                    for (const auto& [path, threshold] : job.conditions.disk_thresholds) {
+                        disk_json[path] = threshold;
+                    }
+                    conditions_json["disk_thresholds"] = disk_json;
                 }
+                
+                job_json["conditions"] = conditions_json;
             }
             
-            config["jobs"].emplace_back(std::move(job_json));
+            config["jobs"].push_back(job_json);
         }
         
-        // Write formatted JSON to file
+        // Write to file with pretty formatting
         std::ofstream file(filename);
-        if (file.is_open()) {
-            file << config.dump(2); // Pretty-print with 2-space indentation
-            file.close();
-            return true;
+        if (!file.is_open()) {
+            std::cerr << "Error: Cannot create file: " << filename << std::endl;
+            return false;
         }
+        
+        file << config.dump(2); // Indent with 2 spaces
+        return true;
         
     } catch (const std::exception& e) {
-        std::cerr << "Error saving JSON: " << e.what() << std::endl;
+        std::cerr << "Error saving jobs to " << filename << ": " << e.what() << std::endl;
+        return false;
     }
-    
-    return false;
 }
 
 /**
- * Validates JSON configuration file structure and syntax
- * @param filename Path to configuration file
- * @param errorMsg Output parameter for detailed error description
- * @return true if file is valid and parseable
- * @note Performs both syntax and semantic validation
+ * Validate JSON file before loading
  */
 bool JobConfig::validateJobsFile(const std::string& filename, std::string& errorMsg) {
+    std::ifstream file(filename);
+    if (!file.is_open()) {
+        errorMsg = "Cannot open file: " + filename;
+        return false;
+    }
+    
+    std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+    
     try {
-        // Check file accessibility
-        std::ifstream file(filename);
-        if (!file.is_open()) {
-            errorMsg = "Cannot open file: " + filename;
-            return false;
-        }
+        nlohmann::json j = nlohmann::json::parse(content);
         
-        // OPTIMIZATION 12: Efficient file reading with pre-allocation
-        file.seekg(0, std::ios::end);
-        size_t fileSize = file.tellg();
-        file.seekg(0, std::ios::beg);
-        
-        if (fileSize == 0) {
-            errorMsg = "File is empty: " + filename;
-            file.close();
-            return false;
-        }
-        
-        // Pre-allocate string for entire file content
-        std::string content;
-        content.reserve(fileSize);
-        
-        // Read entire file in single operation
-        content.assign((std::istreambuf_iterator<char>(file)),
-                      std::istreambuf_iterator<char>());
-        file.close();
-        
-        // Quick structural validation before full JSON parsing
-        if (!isValidJobsJson(content)) {
-            errorMsg = "Invalid JSON structure in file: " + filename;
-            return false;
-        }
-        
-        // Full JSON syntax validation
-        json j = json::parse(content);
-        
-        // Validate required JSON structure
+        // Basic structure validation
         if (!j.contains("jobs") || !j["jobs"].is_array()) {
             errorMsg = "JSON must contain 'jobs' array";
             return false;
         }
         
-        // Semantic validation of job structure
+        // Validate each job
         for (const auto& job_json : j["jobs"]) {
-            if (!job_json.contains("command") || !job_json["command"].is_string()) {
-                errorMsg = "Job missing required 'command' field";
-                return false;
-            }
-            
-            if (!job_json.contains("description") || !job_json["description"].is_string()) {
-                errorMsg = "Job missing required 'description' field";
-                return false;
-            }
-            
-            if (!job_json.contains("schedule") || !job_json["schedule"].is_object()) {
-                errorMsg = "Job missing required 'schedule' object";
+            if (!job_json.contains("description") || !job_json.contains("command")) {
+                errorMsg = "Each job must have 'description' and 'command' fields";
                 return false;
             }
         }
         
         return true;
         
-    } catch (const json::parse_error& e) {
+    } catch (const nlohmann::json::parse_error& e) {
         errorMsg = "JSON parse error: " + std::string(e.what());
         return false;
     } catch (const std::exception& e) {
@@ -429,73 +239,363 @@ bool JobConfig::validateJobsFile(const std::string& filename, std::string& error
 }
 
 /**
- * Fast JSON structure validation without full parsing
- * @param json_string JSON content as string
- * @return true if JSON has valid structure for jobs configuration
- * @note Performs lightweight validation before expensive full parsing
+ * Quick validation of JSON structure without full parsing
  */
 bool JobConfig::isValidJobsJson(const std::string& json_string) {
     try {
-        // OPTIMIZATION 13: Quick sanity checks without full JSON parsing
-        if (json_string.empty()) {
-            return false;
-        }
-        
-        // Size limit check (prevent processing of extremely large files)
-        if (json_string.size() > 1024 * 1024) { // 1MB limit
-            return false;
-        }
-        
-        // Must contain basic required structure
-        if (json_string.find("\"jobs\"") == std::string::npos) {
-            return false;
-        }
-        
-        // OPTIMIZATION 14: Efficient brace/bracket balance checking
-        int braceCount = 0;
-        int bracketCount = 0;
-        bool inString = false;
-        bool escaped = false;
-        
-        // Single-pass validation of JSON structure
-        for (size_t i = 0; i < json_string.size(); ++i) {
-            char c = json_string[i];
-            
-            if (escaped) {
-                escaped = false;
-                continue;
-            }
-            
-            if (c == '\\' && inString) {
-                escaped = true;
-                continue;
-            }
-            
-            if (c == '"') {
-                inString = !inString;
-                continue;
-            }
-            
-            // Track brace/bracket balance outside of strings
-            if (!inString) {
-                switch (c) {
-                    case '{': braceCount++; break;
-                    case '}': braceCount--; break;
-                    case '[': bracketCount++; break;
-                    case ']': bracketCount--; break;
-                }
-                
-                // Early exit if structure becomes unbalanced
-                if (braceCount < 0 || bracketCount < 0) {
-                    return false;
-                }
-            }
-        }
-        
-        // Final balance check - all braces and brackets must be matched
-        return (braceCount == 0 && bracketCount == 0 && !inString);
-        
-    } catch (const std::exception&) {
+        nlohmann::json j = nlohmann::json::parse(json_string);
+        return j.contains("jobs") && j["jobs"].is_array();
+    } catch (const nlohmann::json::parse_error&) {
         return false;
     }
+}
+
+/**
+ * Parse cron schedule string to CronSchedule structure
+ * Supports formats like "0 9 * * 1-5" (Monday-Friday at 9 AM)
+ */
+void JobConfig::parseScheduleFromString(CronJob& job, const std::string& schedule_str) {
+    std::istringstream iss(schedule_str);
+    std::string minute_str, hour_str, day_str, month_str, weekday_str;
+    
+    if (iss >> minute_str >> hour_str >> day_str >> month_str >> weekday_str) {
+        job.schedule.minute = minute_str;
+        job.schedule.hour = hour_str;
+        job.schedule.day_of_month = day_str;
+        job.schedule.month = month_str;
+        job.schedule.day_of_week = weekday_str;
+    } else {
+        std::cerr << "Warning: Could not parse schedule string '" << schedule_str << "'" << std::endl;
+    }
+}
+
+/**
+ * Parse cron schedule to legacy format for compatibility
+ */
+void JobConfig::parseScheduleToLegacyFormat(CronJob& job) {
+    try {
+        job.minute = (job.schedule.minute == "*") ? -1 : std::stoi(job.schedule.minute);
+        job.hour = (job.schedule.hour == "*") ? -1 : std::stoi(job.schedule.hour);
+        job.day_param = (job.schedule.day_of_month == "*") ? -1 : std::stoi(job.schedule.day_of_month);
+        job.month_param = (job.schedule.month == "*") ? -1 : std::stoi(job.schedule.month);
+        
+        // Determine frequency based on schedule
+        if (job.schedule.day_of_week == "1-5") {
+            job.frequency = CronFrequency::WEEKDAY;
+        } else if (job.schedule.day_of_week == "0,6" || job.schedule.day_of_week == "6,0") {
+            job.frequency = CronFrequency::WEEKEND;
+        } else if (job.schedule.day_of_week != "*") {
+            job.frequency = CronFrequency::WEEKLY;
+        } else if (job.schedule.day_of_month != "*") {
+            job.frequency = CronFrequency::MONTHLY;
+        } else if (job.schedule.month != "*") {
+            job.frequency = CronFrequency::YEARLY;
+        } else {
+            job.frequency = CronFrequency::DAILY;
+        }
+        
+    } catch (const std::exception& e) {
+        std::cerr << "Warning: Could not parse schedule fields: " << e.what() << std::endl;
+        // Set defaults
+        job.minute = -1;
+        job.hour = -1;
+        job.day_param = -1;
+        job.month_param = -1;
+        job.frequency = CronFrequency::DAILY;
+    }
+}
+
+/**
+ * Convert legacy format to new schedule structure
+ */
+void JobConfig::convertLegacyToSchedule(CronJob& job) {
+    job.schedule.minute = (job.minute == -1) ? "*" : std::to_string(job.minute);
+    job.schedule.hour = (job.hour == -1) ? "*" : std::to_string(job.hour);
+    job.schedule.day_of_month = (job.day_param == -1) ? "*" : std::to_string(job.day_param);
+    job.schedule.month = (job.month_param == -1) ? "*" : std::to_string(job.month_param);
+    
+    // Set day_of_week based on frequency
+    switch (job.frequency) {
+        case CronFrequency::WEEKDAY:
+            job.schedule.day_of_week = "1-5";
+            break;
+        case CronFrequency::WEEKEND:
+            job.schedule.day_of_week = "0,6";
+            break;
+        case CronFrequency::WEEKLY:
+            // Would need more info to determine specific day
+            job.schedule.day_of_week = "*";
+            break;
+        default:
+            job.schedule.day_of_week = "*";
+            break;
+    }
+}
+
+/**
+ * Check if system meets job conditions
+ * @param conditions JobConditions object containing system resource thresholds
+ * @return true if all conditions are met, false otherwise
+ */
+bool JobConfig::checkJobConditions(const JobConditions& conditions) {
+    // If no conditions are specified, always allow execution
+    if (conditions.cpu_threshold.empty() && 
+        conditions.ram_threshold.empty() && 
+        conditions.loadavg_threshold.empty() && 
+        conditions.disk_thresholds.empty()) {
+        return true;
+    }
+    
+    // Check CPU usage condition
+    if (!conditions.cpu_threshold.empty()) {
+        float currentCpu = getCurrentCpuUsage();
+        if (currentCpu < 0) {
+            std::cerr << "Warning: Could not read CPU usage, ignoring CPU condition" << std::endl;
+        } else {
+            if (!evaluateThreshold(currentCpu, conditions.cpu_threshold, "CPU")) {
+                return false;
+            }
+        }
+    }
+    
+    // Check RAM usage condition
+    if (!conditions.ram_threshold.empty()) {
+        float currentRam = getCurrentRamUsage();
+        if (currentRam < 0) {
+            std::cerr << "Warning: Could not read RAM usage, ignoring RAM condition" << std::endl;
+        } else {
+            if (!evaluateThreshold(currentRam, conditions.ram_threshold, "RAM")) {
+                return false;
+            }
+        }
+    }
+    
+    // Check load average condition
+    if (!conditions.loadavg_threshold.empty()) {
+        float currentLoad = getCurrentLoadAverage();
+        if (currentLoad < 0) {
+            std::cerr << "Warning: Could not read load average, ignoring load condition" << std::endl;
+        } else {
+            if (!evaluateThreshold(currentLoad, conditions.loadavg_threshold, "Load")) {
+                return false;
+            }
+        }
+    }
+    
+    // Check disk usage conditions
+    for (const auto& [path, threshold] : conditions.disk_thresholds) {
+        float currentDisk = getCurrentDiskUsage(path);
+        if (currentDisk < 0) {
+            std::cerr << "Warning: Could not read disk usage for " << path 
+                      << ", ignoring disk condition" << std::endl;
+            continue;
+        }
+        
+        if (!evaluateThreshold(currentDisk, threshold, "Disk[" + path + "]")) {
+            return false;
+        }
+    }
+    
+    return true;
+}
+
+/**
+ * Get current CPU usage percentage (0-100)
+ * @return CPU usage percentage, -1 on error
+ */
+float JobConfig::getCurrentCpuUsage() {
+    std::ifstream file("/proc/stat");
+    if (!file.is_open()) {
+        return -1;
+    }
+    
+    std::string line;
+    std::getline(file, line);
+    file.close();
+    
+    // Parse first line: "cpu user nice system idle iowait irq softirq steal guest guest_nice"
+    std::istringstream iss(line);
+    std::string cpu_label;
+    long user, nice, system, idle, iowait, irq, softirq, steal;
+    
+    if (!(iss >> cpu_label >> user >> nice >> system >> idle >> iowait >> irq >> softirq >> steal)) {
+        return -1;
+    }
+    
+    // Calculate total and idle time
+    long total = user + nice + system + idle + iowait + irq + softirq + steal;
+    long idle_time = idle + iowait;
+    
+    // For a more accurate reading, we should compare with previous values
+    // For simplicity, we'll use a single snapshot approach
+    // In production, consider maintaining previous values for better accuracy
+    
+    static long prev_total = 0;
+    static long prev_idle = 0;
+    
+    if (prev_total == 0) {
+        // First reading, store values and return 0
+        prev_total = total;
+        prev_idle = idle_time;
+        return 0.0f;
+    }
+    
+    long total_diff = total - prev_total;
+    long idle_diff = idle_time - prev_idle;
+    
+    prev_total = total;
+    prev_idle = idle_time;
+    
+    if (total_diff == 0) {
+        return 0.0f;
+    }
+    
+    float cpu_usage = ((float)(total_diff - idle_diff) / total_diff) * 100.0f;
+    return std::max(0.0f, std::min(100.0f, cpu_usage));
+}
+
+/**
+ * Get current RAM usage percentage (0-100)
+ * @return RAM usage percentage, -1 on error
+ */
+float JobConfig::getCurrentRamUsage() {
+    std::ifstream file("/proc/meminfo");
+    if (!file.is_open()) {
+        return -1;
+    }
+    
+    long memTotal = 0, memFree = 0, buffers = 0, cached = 0;
+    std::string line;
+    
+    while (std::getline(file, line)) {
+        std::istringstream iss(line);
+        std::string key;
+        long value;
+        std::string unit;
+        
+        if (iss >> key >> value >> unit) {
+            if (key == "MemTotal:") {
+                memTotal = value;
+            } else if (key == "MemFree:") {
+                memFree = value;
+            } else if (key == "Buffers:") {
+                buffers = value;
+            } else if (key == "Cached:") {
+                cached = value;
+            }
+        }
+        
+        // Early exit if we have all needed values
+        if (memTotal > 0 && memFree >= 0 && buffers >= 0 && cached >= 0) {
+            break;
+        }
+    }
+    
+    file.close();
+    
+    if (memTotal <= 0) {
+        return -1;
+    }
+    
+    // Calculate used memory (excluding buffers and cache)
+    long memUsed = memTotal - memFree - buffers - cached;
+    float usage = ((float)memUsed / memTotal) * 100.0f;
+    
+    return std::max(0.0f, std::min(100.0f, usage));
+}
+
+/**
+ * Get current 1-minute load average
+ * @return Load average, -1 on error
+ */
+float JobConfig::getCurrentLoadAverage() {
+    std::ifstream file("/proc/loadavg");
+    if (!file.is_open()) {
+        return -1;
+    }
+    
+    float loadavg1, loadavg5, loadavg15;
+    if (!(file >> loadavg1 >> loadavg5 >> loadavg15)) {
+        file.close();
+        return -1;
+    }
+    
+    file.close();
+    return loadavg1;
+}
+
+/**
+ * Get current disk usage for specified path
+ * @param path Filesystem path to check
+ * @return Disk usage percentage (0-100), -1 on error
+ */
+float JobConfig::getCurrentDiskUsage(const std::string& path) {
+    // Use statvfs system call for accurate disk usage
+    struct statvfs stat;
+    
+    if (statvfs(path.c_str(), &stat) != 0) {
+        return -1;
+    }
+    
+    // Calculate usage percentage
+    unsigned long long total = stat.f_blocks * stat.f_frsize;
+    unsigned long long free = stat.f_bavail * stat.f_frsize;
+    unsigned long long used = total - free;
+    
+    if (total == 0) {
+        return -1;
+    }
+    
+    float usage = ((float)used / total) * 100.0f;
+    return std::max(0.0f, std::min(100.0f, usage));
+}
+
+/**
+ * Evaluate threshold condition against current value
+ * @param currentValue Current system metric value
+ * @param threshold Threshold string (e.g., "<80%", ">90%")
+ * @param metricName Name of metric for logging
+ * @return true if condition is met
+ */
+bool JobConfig::evaluateThreshold(float currentValue, const std::string& threshold, const std::string& metricName) {
+    if (threshold.empty()) {
+        return true;
+    }
+    
+    // Parse threshold format: "<80%" or ">50%"
+    char operator_char = threshold[0];
+    if (operator_char != '<' && operator_char != '>') {
+        std::cerr << "Warning: Invalid " << metricName << " threshold format: " << threshold << std::endl;
+        return true; // Allow execution on invalid format
+    }
+    
+    // Extract numeric value
+    std::string value_str = threshold.substr(1);
+    if (value_str.back() == '%') {
+        value_str.pop_back();
+    }
+    
+    float threshold_value;
+    try {
+        threshold_value = std::stof(value_str);
+    } catch (const std::exception& e) {
+        std::cerr << "Warning: Invalid " << metricName << " threshold value: " << threshold << std::endl;
+        return true; // Allow execution on parsing error
+    }
+    
+    // Evaluate condition
+    bool condition_met;
+    if (operator_char == '<') {
+        condition_met = currentValue < threshold_value;
+    } else { // operator_char == '>'
+        condition_met = currentValue > threshold_value;
+    }
+    
+    // Log condition evaluation for debugging
+    if (!condition_met) {
+        std::cout << "Job condition not met: " << metricName << " " 
+                  << currentValue << "% " << threshold << std::endl;
+    }
+    
+    return condition_met;
 }

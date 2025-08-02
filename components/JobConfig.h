@@ -3,12 +3,11 @@
 
 #include <vector>
 #include <string>
+#include <sstream>
 #include "CronTypes.h"
-
-// Forward declaration per evitare include pesante di json.hpp nel header
-namespace nlohmann {
-    class json;
-}
+#include "json.hpp"
+#include <sys/statvfs.h>
+#include <sstream> 
 
 /**
  * JobConfig Class - Manages JSON-based job configuration
@@ -70,14 +69,33 @@ public:
 
 private:
     /**
-     * Parse cron schedule string to legacy format for compatibility
+     * Parse cron schedule string to CronSchedule structure
+     */
+    static void parseScheduleFromString(CronJob& job, const std::string& schedule_str);
+    
+    /**
+     * Parse cron schedule to legacy format for compatibility
      */
     static void parseScheduleToLegacyFormat(CronJob& job);
+    
+    /**
+     * Convert legacy format to new schedule structure
+     */
+    static void convertLegacyToSchedule(CronJob& job);
     
     /**
      * Check if system meets job conditions
      */
     static bool checkJobConditions(const JobConditions& conditions);
+
+        /**
+     * System monitoring helper functions
+     */
+    static float getCurrentCpuUsage();
+    static float getCurrentRamUsage();
+    static float getCurrentLoadAverage();
+    static float getCurrentDiskUsage(const std::string& path);
+    static bool evaluateThreshold(float currentValue, const std::string& threshold, const std::string& metricName);
 
 };
 
