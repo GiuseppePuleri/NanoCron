@@ -1,28 +1,643 @@
-[2025-07-28 19:43:33.244] [INFO] === NANOCRON SYSTEM STARTED ===
-[2025-07-28 19:43:33.247] [INFO] Loaded 3 jobs:
-[2025-07-28 19:43:33.247] [INFO] Job: /var/www/app/Cpp/MyCron/Jobs/closeSessionJob (Daily session cleanup)
-  Time: 23:00
-  Frequency: Every day
-[2025-07-28 19:43:33.248] [INFO] Job: /var/www/app/Cpp/MyCron/Jobs/makeAttendanceJob (Monthly XML generation)
-  Time: 5:00
-  Frequency: Day 1 of every month
-[2025-07-28 19:43:33.248] [INFO] Job: /var/www/app/Cpp/MyCron/Jobs/makeReportJob (Monthly PDF generation)
-  Time: 1:00
-  Frequency: Day 1 of every month
-[2025-07-28 19:43:33.249] [INFO] ===================================
-[2025-07-29 00:04:41.935] [INFO] === NANOCRON DAEMON STARTED ===
-[2025-07-29 00:04:41.958] [INFO] Loaded 3 jobs
-[2025-07-29 00:04:41.958] [INFO] Job: Daily session cleanup [/var/www/app/Cpp/MyCron/Jobs/closeSessionJob]
-[2025-07-29 00:04:41.958] [INFO] Job: Monthly XML generation [/var/www/app/Cpp/MyCron/Jobs/makeAttendanceJob]
-[2025-07-29 00:04:41.958] [INFO] Job: Monthly PDF generation [/var/www/app/Cpp/MyCron/Jobs/makeReportJob]
-[2025-07-29 00:04:41.958] [DEBUG] Current time: 0:04 - Tuesday 29/7/2025 - System running normally
-[2025-07-29 13:19:05.570] [INFO] === NANOCRON DAEMON STARTED ===
-[2025-07-29 13:19:05.578] [INFO] Loaded 6 jobs
-[2025-07-29 13:19:05.578] [INFO] Job: Daily session cleanup [/var/www/app/Cpp/MyCron/Jobs/closeSessionJob]
-[2025-07-29 13:19:05.578] [INFO] Job: Daily session cleanup [/var/www/app/Cpp/MyCron/Jobs/closeSessionJob]
-[2025-07-29 13:19:05.578] [INFO] Job: Monthly XML generation [/var/www/app/Cpp/MyCron/Jobs/makeAttendanceJob]
-[2025-07-29 13:19:05.579] [INFO] Job: Monthly PDF generation [/var/www/app/Cpp/MyCron/Jobs/makeReportJob]
-[2025-07-29 13:19:05.579] [INFO] Job: Monthly PDF generation [/var/www/app/Cpp/MyCron/Jobs/makeReportJob]
-[2025-07-29 13:19:05.579] [INFO] Job: CPU usage check every 5 minutes [/usr/local/bin/check_cpu.sh --threshold 90]
-[2025-07-29 13:19:05.579] [INFO] [CPU usage check every 5 minutes] Starting job: /usr/local/bin/check_cpu.sh --threshold 90
-[2025-07-29 13:19:05.609] [ERROR] [CPU usage check every 5 minutes] Job failed with exit code 127 after 0 seconds
+[2025-08-01 14:57:26.900] [INFO] === NANOCRON DAEMON STARTED (v2.1.0) ===
+[2025-08-01 14:57:26.902] [INFO] Working directory: /usr/local/bin
+[2025-08-01 14:57:26.902] [INFO] Initializing ConfigWatcher for: /home/giuseppe/code/NanoCron-v3/init/jobs.json
+[2025-08-01 14:57:26.903] [INFO] ConfigWatcher: Loaded 1 jobs from /home/giuseppe/code/NanoCron-v3/init/jobs.json
+[2025-08-01 14:57:26.903] [INFO] ConfigWatcher: Started watching /home/giuseppe/code/NanoCron-v3/init/jobs.json
+[2025-08-01 14:57:26.903] [INFO] Configuration auto-reload enabled
+[2025-08-01 14:57:26.903] [INFO] Initial load: 1 jobs
+[2025-08-01 14:57:26.903] [INFO] Job: Make dir every minute [/home/giuseppe/code/NanoCron-v3/init/jobs/makeD]
+[2025-08-01 14:57:26.903] [INFO] Entering main daemon loop
+[2025-08-01 14:57:26.903] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 14:57:26.905] [INFO] ConfigWatcher: Watcher thread started
+[2025-08-01 14:57:26.930] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 14:58:06.476] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 14:58:06.483] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 14:59:06.000] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 14:59:06.020] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:00:06.028] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:00:06.050] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:01:05.647] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:01:05.668] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:02:05.262] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:02:05.281] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:03:04.877] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:03:04.905] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:04:04.910] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:04:04.928] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:05:04.393] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:05:04.412] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:06:03.936] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:06:03.959] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:07:02.993] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:07:03.027] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:08:01.943] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:08:01.971] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:09:00.785] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:09:00.803] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:10:19.676] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:10:19.697] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:11:18.518] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:11:18.550] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:12:17.379] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:12:17.433] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:13:16.272] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:13:16.293] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:14:15.126] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:14:15.163] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:15:14.019] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:15:14.039] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:16:13.458] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:16:13.476] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:17:12.209] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:17:12.228] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:18:11.030] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:18:11.046] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:19:09.823] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:19:09.837] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:20:08.610] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:20:08.627] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:21:07.264] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:21:07.280] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:22:05.759] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:22:05.779] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:23:05.116] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:23:05.139] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:24:03.691] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:24:03.709] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:25:02.304] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:25:02.338] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:26:00.803] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:26:00.810] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:27:18.610] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:27:18.670] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:28:17.884] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:28:17.930] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:29:16.509] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:29:16.530] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:30:14.988] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:30:15.078] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:31:13.590] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:31:13.619] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:32:12.115] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:32:12.137] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:33:10.572] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:33:10.579] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:34:09.090] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:34:09.119] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:35:08.320] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:35:08.374] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:36:06.809] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:36:06.847] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:37:05.168] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:37:05.184] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:38:03.654] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:38:03.684] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:39:02.131] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:39:02.139] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:40:00.499] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:40:00.522] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:41:18.907] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:41:18.938] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:42:17.340] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:42:17.356] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:43:15.757] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:43:15.784] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:44:14.165] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:44:14.187] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:45:12.595] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:45:12.618] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:46:10.908] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:46:10.927] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:47:10.097] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:47:10.121] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:48:08.435] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:48:08.461] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:49:06.887] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:49:06.910] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:50:05.214] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:50:05.239] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:51:03.534] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:51:03.558] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:52:01.921] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:52:01.947] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:53:00.202] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:53:00.228] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:54:18.539] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:54:18.565] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:55:16.837] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:55:16.877] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:56:15.164] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:56:15.200] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:57:13.532] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:57:13.554] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:58:12.682] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:58:12.704] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 15:59:10.999] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 15:59:11.021] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:00:09.274] [DEBUG] Current time: 16:00 - Friday 1/8/2025 - System running normally
+[2025-08-01 16:00:09.277] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:00:09.308] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:01:07.570] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:01:07.595] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:02:05.925] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:02:05.948] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:03:04.110] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:03:04.141] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:04:02.386] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:04:02.404] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:05:00.710] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:05:00.730] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:06:18.956] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:06:18.985] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:07:17.273] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:07:17.295] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:08:15.505] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:08:15.535] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:09:13.688] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:09:13.709] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:10:12.864] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:10:12.888] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:11:11.119] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:11:11.141] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:12:09.402] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:12:09.424] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:13:07.609] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:13:07.638] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:14:05.888] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:14:05.937] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:15:04.076] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:15:04.103] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:16:02.325] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:16:02.334] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:17:01.477] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:17:01.501] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:18:18.823] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:18:18.841] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:19:17.020] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:19:17.062] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:20:15.320] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:20:15.338] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:21:13.555] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:21:13.571] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:22:12.687] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:22:12.703] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:23:10.974] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:23:10.992] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:24:09.210] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:24:09.240] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:25:07.361] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:25:07.366] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:26:05.568] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:26:05.574] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:27:03.780] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:27:03.784] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:28:01.947] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:28:01.951] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:29:01.098] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:29:01.103] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:30:18.312] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:30:18.316] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:31:16.489] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:31:16.496] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:32:14.688] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:32:14.697] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:33:12.816] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:33:12.821] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:34:11.919] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:34:11.924] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:35:10.098] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:35:10.104] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:36:08.212] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:36:08.221] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:37:06.407] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:37:06.417] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:38:04.559] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:38:04.570] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:39:02.667] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:39:02.831] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:40:00.942] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:40:00.950] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:41:00.070] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:41:00.075] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:42:17.261] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:42:17.266] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:43:15.383] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:43:15.388] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:44:13.517] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:44:13.524] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:45:12.587] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:45:12.592] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:46:10.707] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:46:10.718] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:47:08.810] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:47:08.822] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:48:06.904] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:48:06.909] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:49:05.001] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:49:05.006] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:50:03.089] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:50:03.095] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:51:01.138] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:51:01.144] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:52:19.250] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:52:19.258] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:53:17.320] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:53:17.326] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:54:15.421] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:54:15.440] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:55:13.522] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:55:13.527] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:56:11.575] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:56:11.582] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:57:10.657] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:57:10.661] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:58:08.728] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:58:08.733] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 16:59:06.792] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 16:59:06.796] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:00:04.848] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:00:04.852] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:01:02.926] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:01:02.932] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:02:00.969] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:02:00.974] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:03:19.021] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:03:19.029] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:04:17.088] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:04:17.112] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:05:15.216] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:05:15.220] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:06:13.293] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:06:13.299] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:07:11.344] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:07:11.363] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:08:09.368] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:08:09.378] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:09:08.409] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:09:08.415] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:10:06.435] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:10:06.440] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:11:04.452] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:11:04.460] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:12:02.482] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:12:02.490] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:13:00.510] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:13:00.515] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:14:18.497] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:14:18.503] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:15:16.501] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:15:16.512] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:16:14.486] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:16:14.493] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:17:12.503] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:17:12.508] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:18:10.513] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:18:10.530] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:19:08.499] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:19:08.503] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:20:07.512] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:20:07.517] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:21:05.471] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:21:05.475] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:22:03.401] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:22:03.409] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:23:01.425] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:23:01.430] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:24:18.357] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:24:18.361] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:25:17.357] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:25:17.362] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:26:15.331] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:26:15.336] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:27:13.263] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:27:13.268] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:28:11.205] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:28:11.210] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:29:09.152] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:29:09.156] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:30:07.068] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:30:07.073] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:31:05.014] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:31:05.020] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:32:03.976] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:32:03.980] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:33:01.874] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:33:01.878] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:34:18.752] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:34:18.757] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:35:16.645] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:35:16.651] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:36:14.571] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:36:14.576] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:37:13.519] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:37:13.524] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:38:11.423] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:38:11.428] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:39:09.334] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:39:09.338] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:40:07.194] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:40:07.199] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:41:05.115] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:41:05.121] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:42:03.010] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:42:03.016] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:43:00.900] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:43:00.907] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:44:18.801] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:44:18.809] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:45:16.639] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:45:16.644] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:46:14.571] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:46:14.576] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:47:12.438] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:47:12.442] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:48:11.382] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:48:11.397] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:49:09.263] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:49:09.268] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:50:07.104] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:50:07.111] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:51:05.008] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:51:05.035] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:52:02.874] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:52:02.893] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:53:00.712] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:53:00.723] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:54:18.589] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:54:18.627] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:55:16.458] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:55:16.480] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:56:14.335] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:56:14.356] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:57:12.185] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:57:12.208] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:58:09.958] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:58:09.985] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 17:59:07.810] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 17:59:07.824] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:00:06.742] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:00:06.749] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:01:04.546] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:01:04.568] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:02:02.419] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:02:02.428] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:03:00.236] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:03:00.255] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:04:18.049] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:04:18.060] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:05:15.795] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:05:15.814] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:06:13.635] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:06:13.659] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:07:11.412] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:07:11.434] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:08:09.221] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:08:09.229] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:09:06.981] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:09:07.011] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:10:04.741] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:10:04.760] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:11:02.545] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:11:02.569] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:12:01.427] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:12:01.448] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:13:19.128] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:13:19.141] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:14:16.362] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:14:16.381] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:15:14.231] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:15:14.251] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:16:12.065] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:16:12.082] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:17:09.837] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:17:09.856] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:18:07.627] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:18:07.645] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:19:05.357] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:19:05.382] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:20:04.212] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:20:04.232] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:21:01.985] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:21:02.009] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:22:18.550] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:22:18.571] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:23:16.209] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:23:16.245] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:24:13.980] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:24:14.014] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:25:12.865] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:25:12.900] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:26:10.520] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:26:10.567] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:27:08.263] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:27:08.282] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:28:05.972] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:28:05.996] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:29:03.686] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:29:03.714] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:30:01.244] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:30:01.261] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:31:18.969] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:31:18.985] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:32:16.567] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:32:16.585] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:33:14.356] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:33:14.374] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:34:11.869] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:34:11.898] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:35:09.576] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:35:09.598] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:36:08.421] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:36:08.442] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:37:06.087] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:37:06.110] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:38:03.708] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:38:03.731] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:39:01.290] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:39:01.309] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:40:17.654] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:40:17.678] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:41:16.439] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:41:16.489] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:42:14.143] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:42:14.160] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:43:11.656] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:43:11.682] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:44:09.335] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:44:09.361] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:45:06.831] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:45:06.853] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:46:04.393] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:46:04.421] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:47:02.008] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:47:02.028] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:48:00.797] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:48:00.826] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:49:17.067] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:49:17.080] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:50:14.594] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:50:14.613] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:51:12.114] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:51:12.133] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:52:09.630] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:52:09.655] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:53:08.482] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:53:08.500] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:54:05.996] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:54:06.045] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:55:03.535] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:55:03.563] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:56:03.584] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:56:03.612] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:57:01.932] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:57:01.974] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:58:00.268] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:58:00.282] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 18:59:18.548] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 18:59:18.567] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 19:00:16.735] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 19:00:16.752] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 19:01:14.847] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 19:01:14.863] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 19:02:12.876] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 19:02:12.895] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 19:03:11.043] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 19:03:11.055] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 19:13:30.917] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 19:13:31.000] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 19:14:13.012] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 19:14:13.025] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 19:15:11.715] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 19:15:11.743] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 19:16:10.065] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 19:16:10.084] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 19:17:08.479] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 19:17:08.496] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 19:18:06.725] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 19:18:06.743] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 19:19:04.982] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 19:19:04.998] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 19:20:03.338] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 19:20:03.350] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 19:21:02.505] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 19:21:02.516] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 19:22:00.916] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 19:22:00.943] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-01 19:23:18.281] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-01 19:23:18.310] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 10:28:39.161] [INFO] === NANOCRON DAEMON STARTED (v2.1.0) ===
+[2025-08-02 10:28:39.164] [INFO] Working directory: /usr/local/bin
+[2025-08-02 10:28:39.164] [INFO] Initializing ConfigWatcher for: /home/giuseppe/code/NanoCron-v3/init/jobs.json
+[2025-08-02 10:28:39.167] [INFO] ConfigWatcher: Loaded 1 jobs from /home/giuseppe/code/NanoCron-v3/init/jobs.json
+[2025-08-02 10:28:39.167] [INFO] ConfigWatcher: Started watching /home/giuseppe/code/NanoCron-v3/init/jobs.json
+[2025-08-02 10:28:39.167] [INFO] Configuration auto-reload enabled
+[2025-08-02 10:28:39.167] [INFO] Initial load: 1 jobs
+[2025-08-02 10:28:39.167] [INFO] Job: Make dir every minute [/home/giuseppe/code/NanoCron-v3/init/jobs/makeD]
+[2025-08-02 10:28:39.167] [INFO] Entering main daemon loop
+[2025-08-02 10:28:39.167] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 10:28:39.168] [INFO] ConfigWatcher: Watcher thread started
+[2025-08-02 10:28:39.194] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 10:29:19.201] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 10:29:19.229] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 10:30:20.197] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 10:30:20.217] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 10:31:00.665] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 10:31:00.673] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 10:32:01.712] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 10:32:01.738] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 10:33:02.799] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 10:33:02.820] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 10:34:03.356] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 10:34:03.362] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 10:35:04.615] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 10:35:04.639] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 10:36:06.018] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 10:36:06.037] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 10:37:07.268] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 10:37:07.286] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 10:38:07.898] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 10:38:07.904] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 10:39:09.193] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 10:39:09.238] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 10:40:10.539] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 10:40:10.560] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 10:41:11.984] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 10:41:12.002] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 10:42:13.439] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 10:42:13.457] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 10:43:14.882] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 10:43:14.899] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 10:44:16.324] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 10:44:16.346] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 10:45:16.862] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 10:45:16.879] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 10:46:18.210] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 10:46:18.230] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 10:47:19.595] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 10:47:19.615] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 10:48:00.299] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 10:48:00.317] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 10:49:01.613] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 10:49:01.630] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 10:50:02.974] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 10:50:02.989] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 10:51:04.306] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 10:51:04.322] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 10:52:05.593] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 10:52:05.608] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 10:53:06.963] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 10:53:06.982] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 13:00:47.172] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 13:00:47.289] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 13:03:35.652] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 13:03:35.684] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 13:04:15.688] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 13:04:15.706] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 13:05:15.720] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 13:05:15.761] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 13:06:15.763] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 13:06:15.778] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 13:07:15.782] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 13:07:15.801] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 13:08:15.810] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 13:08:15.829] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 13:09:15.832] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 13:09:15.855] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 13:10:15.857] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 13:10:15.881] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 13:11:15.883] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 13:11:15.907] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 13:12:15.908] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 13:12:15.932] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 13:13:15.936] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 13:13:15.954] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 13:14:15.956] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 13:14:15.975] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 13:15:15.982] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 13:15:16.002] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 13:16:16.007] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 13:16:16.023] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 13:17:16.027] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 13:17:16.052] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 13:18:16.053] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 13:18:16.088] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 13:19:16.111] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 13:19:16.136] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 13:20:16.138] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 13:20:16.158] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 13:21:16.164] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 13:21:16.183] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 13:22:16.186] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 13:22:16.205] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 13:23:16.209] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 13:23:16.233] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 13:24:16.262] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 13:24:16.281] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 13:25:16.284] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 13:25:16.303] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 13:26:16.305] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 13:26:16.328] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 13:27:16.333] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 13:27:16.362] [ERROR] [Make dir every minute] Job failed with exit code 127
+[2025-08-02 13:28:16.363] [INFO] [Make dir every minute] Starting job: /home/giuseppe/code/NanoCron-v3/init/jobs/makeD
+[2025-08-02 13:28:16.386] [ERROR] [Make dir every minute] Job failed with exit code 127

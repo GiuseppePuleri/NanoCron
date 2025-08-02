@@ -2,7 +2,13 @@
 #define JOB_CONFIG_H
 
 #include <vector>
+#include <string>
 #include "CronTypes.h"
+
+// Forward declaration per evitare include pesante di json.hpp nel header
+namespace nlohmann {
+    class json;
+}
 
 /**
  * JobConfig Class - Manages JSON-based job configuration
@@ -29,6 +35,15 @@ public:
     static std::vector<CronJob> parseJobsFromJson(const std::string& json_string);
     
     /**
+     * OTTIMIZZATO: Parse direttamente da nlohmann::json object (move semantics)
+     * Evita doppio parsing JSON -> string -> JSON
+     * 
+     * @param j JSON object (moved)
+     * @return Vector containing parsed jobs
+     */
+    static std::vector<CronJob> parseJobsFromJson(nlohmann::json&& j);
+    
+    /**
      * Save jobs to JSON file
      * 
      * @param jobs Vector of jobs to save
@@ -37,12 +52,21 @@ public:
      */
     static bool saveJobsToJson(const std::vector<CronJob>& jobs, const std::string& filename);
     
+    // NEW: Validation methods for auto-reload feature
     /**
-     * Create example JSON configuration file
-     * 
-     * @param filename Output file path
+     * Validate JSON file before loading
+     * @param filename Path to JSON file
+     * @param errorMsg Output error message if validation fails
+     * @return true if file is valid and parseable
      */
-    static void createExampleConfig(const std::string& filename = "jobs.json");
+    static bool validateJobsFile(const std::string& filename, std::string& errorMsg);
+    
+    /**
+     * Quick validation of JSON structure without full parsing
+     * @param json_string Raw JSON content
+     * @return true if JSON structure looks valid
+     */
+    static bool isValidJobsJson(const std::string& json_string);
 
 private:
     /**
@@ -54,11 +78,7 @@ private:
      * Check if system meets job conditions
      */
     static bool checkJobConditions(const JobConditions& conditions);
-    
-    /**
-     * Get fallback jobs if JSON loading fails
-     */
-    static std::vector<CronJob> getFallbackJobs();
+
 };
 
 #endif // JOB_CONFIG_H

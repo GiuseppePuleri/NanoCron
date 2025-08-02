@@ -1,0 +1,230 @@
+=== nanoCron vs System Cron Performance Test Results (UNIFIED METHODOLOGY) ===
+Version: 2.0 - Fixed Methodology Issues
+Date: Fri Aug  1 00:22:03 CEST 2025
+System: Linux GIUSEPPE-TAB 6.6.87.2-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Thu Jun  5 18:30:46 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
+
+=== METHODOLOGY IMPROVEMENTS ===
+1. UNIFIED MEMORY MEASUREMENT: Both tests now use /proc/self/status
+2. UNIFIED CPU MEASUREMENT: Both tests use clock() for current process
+3. COMPARABLE WORKLOADS: Both tests perform similar parsing operations
+4. VALIDITY METRICS: Added metadata to assess test quality
+5. ABSOLUTE VALUES: Now reporting both delta and absolute memory values
+========================================
+
+=== nanoCron Unified Parse Test Metrics (UNIFIED) ===
+Timestamp: Fri Aug  1 00:22:03 2025
+Parse Time: 23977 microseconds
+Parse Time (ms): 23.977 ms
+Initial Memory: 3328 KB
+Peak Memory: 3968 KB
+Memory Used: 640 KB
+Peak CPU Usage: 99.0726%
+Average CPU Usage: 52.8684%
+CPU Samples: 3
+--- Test Validity Metrics ---
+Parsing Method: JSON Parse
+JSON Jobs Parsed: 10
+JSON Objects Processed: 31
+Successful Parsing: YES
+JSON File Size: 3164 bytes
+Test Duration: 23.977 ms
+Memory Measurement: /proc/self/status (UNIFIED)
+CPU Measurement: clock() current process (UNIFIED)
+----------------------------------------
+=== nanoCron Unified Parse Test Metrics (UNIFIED) ===
+Timestamp: Fri Aug  1 00:22:05 2025
+Parse Time: 12127 microseconds
+Parse Time (ms): 12.127 ms
+Initial Memory: 3328 KB
+Peak Memory: 3840 KB
+Memory Used: 512 KB
+Peak CPU Usage: 82.3196%
+Average CPU Usage: 41.1598%
+CPU Samples: 2
+--- Test Validity Metrics ---
+Parsing Method: JSON Parse
+JSON Jobs Parsed: 10
+JSON Objects Processed: 31
+Successful Parsing: YES
+JSON File Size: 3164 bytes
+Test Duration: 12.127 ms
+Memory Measurement: /proc/self/status (UNIFIED)
+CPU Measurement: clock() current process (UNIFIED)
+----------------------------------------
+=== nanoCron Unified Parse Test Metrics (UNIFIED) ===
+Timestamp: Fri Aug  1 00:22:07 2025
+Parse Time: 15152 microseconds
+Parse Time (ms): 15.152 ms
+Initial Memory: 3328 KB
+Peak Memory: 3840 KB
+Memory Used: 512 KB
+Peak CPU Usage: 100%
+Average CPU Usage: 50%
+CPU Samples: 2
+--- Test Validity Metrics ---
+Parsing Method: JSON Parse
+JSON Jobs Parsed: 10
+JSON Objects Processed: 31
+Successful Parsing: YES
+JSON File Size: 3164 bytes
+Test Duration: 15.152 ms
+Memory Measurement: /proc/self/status (UNIFIED)
+CPU Measurement: clock() current process (UNIFIED)
+----------------------------------------
+=== nanoCron Unified Parse Test Metrics (UNIFIED) ===
+Timestamp: Fri Aug  1 00:22:09 2025
+Parse Time: 12002 microseconds
+Parse Time (ms): 12.002 ms
+Initial Memory: 3328 KB
+Peak Memory: 3840 KB
+Memory Used: 512 KB
+Peak CPU Usage: 85.4705%
+Average CPU Usage: 42.7352%
+CPU Samples: 2
+--- Test Validity Metrics ---
+Parsing Method: JSON Parse
+JSON Jobs Parsed: 10
+JSON Objects Processed: 31
+Successful Parsing: YES
+JSON File Size: 3164 bytes
+Test Duration: 12.002 ms
+Memory Measurement: /proc/self/status (UNIFIED)
+CPU Measurement: clock() current process (UNIFIED)
+----------------------------------------
+=== nanoCron Unified Parse Test Metrics (UNIFIED) ===
+Timestamp: Fri Aug  1 00:22:11 2025
+Parse Time: 12433 microseconds
+Parse Time (ms): 12.433 ms
+Initial Memory: 3328 KB
+Peak Memory: 3840 KB
+Memory Used: 512 KB
+Peak CPU Usage: 81.7145%
+Average CPU Usage: 40.8572%
+CPU Samples: 2
+--- Test Validity Metrics ---
+Parsing Method: JSON Parse
+JSON Jobs Parsed: 10
+JSON Objects Processed: 31
+Successful Parsing: YES
+JSON File Size: 3164 bytes
+Test Duration: 12.433 ms
+Memory Measurement: /proc/self/status (UNIFIED)
+CPU Measurement: clock() current process (UNIFIED)
+----------------------------------------
+=== System Cron Real System Cron Test Metrics (REAL SYSTEM) ===
+Timestamp: Fri Aug  1 00:22:14 2025
+Parse Time: 513067 microseconds
+Parse Time (ms): 513.067 ms
+Initial Memory: 3328 KB
+Peak Memory: 3712 KB
+Memory Used: 384 KB
+Peak CPU Usage: 22.7723%
+Average CPU Usage: 4.61794%
+CPU Samples: 48
+--- Test Validity Metrics ---
+Parsing Method: Real System Cron Operations
+Crontab Jobs Created: 10
+Cron Operations Performed: 4
+Real Cron Activity: YES
+Crontab Backup Created: NO
+Crontab Restored: NO
+Test Duration: 513.067 ms
+Memory Measurement: /proc/self/status (UNIFIED)
+CPU Measurement: clock() current process (UNIFIED)
+----------------------------------------
+=== System Cron Real System Cron Test Metrics (REAL SYSTEM) ===
+Timestamp: Fri Aug  1 00:22:16 2025
+Parse Time: 404454 microseconds
+Parse Time (ms): 404.454 ms
+Initial Memory: 3328 KB
+Peak Memory: 3712 KB
+Memory Used: 384 KB
+Peak CPU Usage: 21.3909%
+Average CPU Usage: 4.54718%
+CPU Samples: 38
+--- Test Validity Metrics ---
+Parsing Method: Real System Cron Operations
+Crontab Jobs Created: 10
+Cron Operations Performed: 4
+Real Cron Activity: YES
+Crontab Backup Created: NO
+Crontab Restored: NO
+Test Duration: 404.454 ms
+Memory Measurement: /proc/self/status (UNIFIED)
+CPU Measurement: clock() current process (UNIFIED)
+----------------------------------------
+=== System Cron Real System Cron Test Metrics (REAL SYSTEM) ===
+Timestamp: Fri Aug  1 00:22:17 2025
+Parse Time: 305163 microseconds
+Parse Time (ms): 305.163 ms
+Initial Memory: 3328 KB
+Peak Memory: 3712 KB
+Memory Used: 384 KB
+Peak CPU Usage: 28.1286%
+Average CPU Usage: 4.7396%
+CPU Samples: 29
+--- Test Validity Metrics ---
+Parsing Method: Real System Cron Operations
+Crontab Jobs Created: 10
+Cron Operations Performed: 4
+Real Cron Activity: YES
+Crontab Backup Created: NO
+Crontab Restored: NO
+Test Duration: 305.163 ms
+Memory Measurement: /proc/self/status (UNIFIED)
+CPU Measurement: clock() current process (UNIFIED)
+----------------------------------------
+=== System Cron Real System Cron Test Metrics (REAL SYSTEM) ===
+Timestamp: Fri Aug  1 00:22:19 2025
+Parse Time: 421503 microseconds
+Parse Time (ms): 421.503 ms
+Initial Memory: 3328 KB
+Peak Memory: 3712 KB
+Memory Used: 384 KB
+Peak CPU Usage: 34.3998%
+Average CPU Usage: 5.53103%
+CPU Samples: 40
+--- Test Validity Metrics ---
+Parsing Method: Real System Cron Operations
+Crontab Jobs Created: 10
+Cron Operations Performed: 4
+Real Cron Activity: YES
+Crontab Backup Created: NO
+Crontab Restored: NO
+Test Duration: 421.503 ms
+Memory Measurement: /proc/self/status (UNIFIED)
+CPU Measurement: clock() current process (UNIFIED)
+----------------------------------------
+=== System Cron Real System Cron Test Metrics (REAL SYSTEM) ===
+Timestamp: Fri Aug  1 00:22:22 2025
+Parse Time: 422249 microseconds
+Parse Time (ms): 422.249 ms
+Initial Memory: 3328 KB
+Peak Memory: 3712 KB
+Memory Used: 384 KB
+Peak CPU Usage: 35.0493%
+Average CPU Usage: 5.54218%
+CPU Samples: 40
+--- Test Validity Metrics ---
+Parsing Method: Real System Cron Operations
+Crontab Jobs Created: 10
+Cron Operations Performed: 4
+Real Cron Activity: YES
+Crontab Backup Created: NO
+Crontab Restored: NO
+Test Duration: 422.249 ms
+Memory Measurement: /proc/self/status (UNIFIED)
+CPU Measurement: clock() current process (UNIFIED)
+----------------------------------------
+
+========================================
+=== COMPARATIVE ANALYSIS (UNIFIED METHODOLOGY) ===
+========================================
+
+=== TEST VALIDITY ASSESSMENT ===
+Methodology: UNIFIED (Both tests use same measurement techniques)
+Memory Measurement: /proc/self/status VmRSS for both tests
+CPU Measurement: clock() current process for both tests
+Workload Comparability: Both perform parsing operations in dedicated processes
+Analysis completed at: Fri Aug  1 00:22:24 CEST 2025
+========================================

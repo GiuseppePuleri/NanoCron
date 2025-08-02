@@ -1,0 +1,126 @@
+=== nanoCron vs System Cron Performance Test Results ===
+Date: Thu Jul 31 22:42:54 CEST 2025
+System: Linux GIUSEPPE-TAB 6.6.87.2-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Thu Jun  5 18:30:46 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
+
+=== nanoCron Standalone Parse Test Metrics ===
+Timestamp: Thu Jul 31 22:42:54 2025
+Parse Time: 5273 microseconds
+Parse Time (ms): 5.273 ms
+Initial Memory: 3328 KB
+Peak Memory: 3712 KB
+Memory Used: 384 KB
+Peak CPU Usage: 0%
+Average CPU Usage: 0%
+CPU Samples: 1
+----------------------------------------
+=== nanoCron Standalone Parse Test Metrics ===
+Timestamp: Thu Jul 31 22:42:56 2025
+Parse Time: 4064 microseconds
+Parse Time (ms): 4.064 ms
+Initial Memory: 3328 KB
+Peak Memory: 3712 KB
+Memory Used: 384 KB
+Peak CPU Usage: 0%
+Average CPU Usage: 0%
+CPU Samples: 1
+----------------------------------------
+=== nanoCron Standalone Parse Test Metrics ===
+Timestamp: Thu Jul 31 22:42:58 2025
+Parse Time: 3937 microseconds
+Parse Time (ms): 3.937 ms
+Initial Memory: 3328 KB
+Peak Memory: 3712 KB
+Memory Used: 384 KB
+Peak CPU Usage: 0%
+Average CPU Usage: 0%
+CPU Samples: 1
+----------------------------------------
+=== nanoCron Standalone Parse Test Metrics ===
+Timestamp: Thu Jul 31 22:43:00 2025
+Parse Time: 3672 microseconds
+Parse Time (ms): 3.672 ms
+Initial Memory: 3328 KB
+Peak Memory: 3712 KB
+Memory Used: 384 KB
+Peak CPU Usage: 0%
+Average CPU Usage: 0%
+CPU Samples: 1
+----------------------------------------
+=== nanoCron Standalone Parse Test Metrics ===
+Timestamp: Thu Jul 31 22:43:02 2025
+Parse Time: 4188 microseconds
+Parse Time (ms): 4.188 ms
+Initial Memory: 3328 KB
+Peak Memory: 3712 KB
+Memory Used: 384 KB
+Peak CPU Usage: 0%
+Average CPU Usage: 0%
+CPU Samples: 1
+----------------------------------------
+=== System Cron Simulated Activity Metrics ===
+Timestamp: Thu Jul 31 22:43:05 2025
+Parse Time: 1063741 microseconds
+Parse Time (ms): 1063.74 ms
+Initial Memory: 2432 KB
+Peak Memory: 2432 KB
+Memory Used: 0 KB
+Peak CPU Usage: 0%
+Average CPU Usage: 0%
+CPU Samples: 21
+Cron PID: 161
+----------------------------------------
+=== System Cron Simulated Activity Metrics ===
+Timestamp: Thu Jul 31 22:43:08 2025
+Parse Time: 1017004 microseconds
+Parse Time (ms): 1017 ms
+Initial Memory: 2432 KB
+Peak Memory: 2432 KB
+Memory Used: 0 KB
+Peak CPU Usage: 0%
+Average CPU Usage: 0%
+CPU Samples: 20
+Cron PID: 161
+----------------------------------------
+=== System Cron Simulated Activity Metrics ===
+Timestamp: Thu Jul 31 22:43:11 2025
+Parse Time: 1026107 microseconds
+Parse Time (ms): 1026.11 ms
+Initial Memory: 2432 KB
+Peak Memory: 2432 KB
+Memory Used: 0 KB
+Peak CPU Usage: 0%
+Average CPU Usage: 0%
+CPU Samples: 20
+Cron PID: 161
+----------------------------------------
+=== System Cron Simulated Activity Metrics ===
+Timestamp: Thu Jul 31 22:43:14 2025
+Parse Time: 1039562 microseconds
+Parse Time (ms): 1039.56 ms
+Initial Memory: 2432 KB
+Peak Memory: 2432 KB
+Memory Used: 0 KB
+Peak CPU Usage: 0%
+Average CPU Usage: 0%
+CPU Samples: 20
+Cron PID: 161
+----------------------------------------
+=== System Cron Simulated Activity Metrics ===
+Timestamp: Thu Jul 31 22:43:17 2025
+Parse Time: 1031505 microseconds
+Parse Time (ms): 1031.51 ms
+Initial Memory: 2432 KB
+Peak Memory: 2432 KB
+Memory Used: 0 KB
+Peak CPU Usage: 0%
+Average CPU Usage: 0%
+CPU Samples: 20
+Cron PID: 161
+----------------------------------------
+
+========================================
+=== COMPARATIVE ANALYSIS ===
+========================================
+
+Analysis completed at: Thu Jul 31 22:43:20 CEST 2025
+========================================

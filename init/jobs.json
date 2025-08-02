@@ -1,109 +1,14 @@
 {
   "jobs": [
     {
-      "command": "/var/www/app/Cpp/MyCron/Jobs/closeSessionJob",
-      "conditions": {
-        "cpu": "<95%",
-        "loadavg": "<10",
-        "ram": "<90%"
-      },
-      "description": "Daily session cleanup",
-      "schedule": {
-        "day_of_month": "*",
-        "day_of_week": "*",
-        "hour": "23",
-        "minute": "0",
-        "month": "*"
-      }
-    },
-    {
-      "command": "/var/www/app/Cpp/MyCron/Jobs/closeSessionJob",
-      "conditions": {
-        "cpu": "<95%",
-        "loadavg": "<10",
-        "ram": "<90%"
-      },
-      "description": "Daily session cleanup",
-      "schedule": {
-        "day_of_month": "*",
-        "day_of_week": "*",
-        "hour": "23",
-        "minute": "0",
-        "month": "*"
-      }
-    },
-        {
-      "command": "/var/www/app/Cpp/MyCron/Jobs/closeSessionJob",
-      "conditions": {
-        "cpu": "<95%",
-        "loadavg": "<10",
-        "ram": "<90%"
-      },
-      "description": "Daily session cleanup",
-      "schedule": {
-        "day_of_month": "*",
-        "day_of_week": "*",
-        "hour": "23",
-        "minute": "0",
-        "month": "*"
-      }
-    },
-    {
-      "command": "/var/www/app/Cpp/MyCron/Jobs/makeAttendanceJob",
-      "conditions": {
-        "disk": {
-          "/var": "<95%"
-        }
-      },
-      "description": "Monthly XML generation",
-      "schedule": {
-        "day_of_month": "1",
-        "day_of_week": "*",
-        "hour": "5",
-        "minute": "0",
-        "month": "*"
-      }
-    },
-    {
-      "command": "/var/www/app/Cpp/MyCron/Jobs/makeReportJob",
+      "command": "/home/giuseppe/code/NanoCron-v3/init/jobs/makeD",
       "conditions": {},
-      "description": "Monthly PDF generation",
-      "schedule": {
-        "day_of_month": "1",
-        "day_of_week": "*",
-        "hour": "1",
-        "minute": "0",
-        "month": "*"
-      }
-    },
-        {
-      "command": "/var/www/app/Cpp/MyCron/Jobs/makeReportJob",
-      "conditions": {},
-      "description": "Monthly PDF generation",
-      "schedule": {
-        "day_of_month": "1",
-        "day_of_week": "*",
-        "hour": "1",
-        "minute": "0",
-        "month": "*"
-      }
-    },
-    {
-      "command": "/usr/local/bin/check_cpu.sh --threshold 90",
-      "conditions": {
-        "cpu": ">90%",
-        "disk": {
-          "/var": ">95%"
-        },
-        "loadavg": ">5",
-        "ram": ">80%"
-      },
-      "description": "CPU usage check every 5 minutes",
+      "description": "Make dir every minute",
       "schedule": {
         "day_of_month": "*",
         "day_of_week": "*",
         "hour": "*",
-        "minute": "*/5",
+        "minute": "*",
         "month": "*"
       }
     }

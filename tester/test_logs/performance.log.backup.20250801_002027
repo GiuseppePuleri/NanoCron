@@ -1,0 +1,113 @@
+=== nanoCron vs System Cron Performance Test Results (UNIFIED METHODOLOGY) ===
+Version: 2.0 - Fixed Methodology Issues
+Date: Thu Jul 31 23:42:30 CEST 2025
+System: Linux GIUSEPPE-TAB 6.6.87.2-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Thu Jun  5 18:30:46 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
+
+=== METHODOLOGY IMPROVEMENTS ===
+1. UNIFIED MEMORY MEASUREMENT: Both tests now use /proc/self/status
+2. UNIFIED CPU MEASUREMENT: Both tests use clock() for current process
+3. COMPARABLE WORKLOADS: Both tests perform similar parsing operations
+4. VALIDITY METRICS: Added metadata to assess test quality
+5. ABSOLUTE VALUES: Now reporting both delta and absolute memory values
+========================================
+
+=== nanoCron Unified Parse Test Metrics (UNIFIED) ===
+Timestamp: Thu Jul 31 23:42:30 2025
+Parse Time: 5160 microseconds
+Parse Time (ms): 5.16 ms
+Initial Memory: 3328 KB
+Peak Memory: 3712 KB
+Memory Used: 384 KB
+Peak CPU Usage: 0%
+Average CPU Usage: 0%
+CPU Samples: 1
+--- Test Validity Metrics ---
+Parsing Method: JSON Parse
+JSON Jobs Parsed: 10
+JSON Objects Processed: 31
+Successful Parsing: YES
+JSON File Size: 3185 bytes
+Test Duration: 5.16 ms
+Memory Measurement: /proc/self/status (UNIFIED)
+CPU Measurement: clock() current process (UNIFIED)
+----------------------------------------
+=== nanoCron Unified Parse Test Metrics (UNIFIED) ===
+Timestamp: Thu Jul 31 23:42:32 2025
+Parse Time: 4604 microseconds
+Parse Time (ms): 4.604 ms
+Initial Memory: 3328 KB
+Peak Memory: 3712 KB
+Memory Used: 384 KB
+Peak CPU Usage: 0%
+Average CPU Usage: 0%
+CPU Samples: 1
+--- Test Validity Metrics ---
+Parsing Method: JSON Parse
+JSON Jobs Parsed: 10
+JSON Objects Processed: 31
+Successful Parsing: YES
+JSON File Size: 3185 bytes
+Test Duration: 4.604 ms
+Memory Measurement: /proc/self/status (UNIFIED)
+CPU Measurement: clock() current process (UNIFIED)
+----------------------------------------
+=== nanoCron Unified Parse Test Metrics (UNIFIED) ===
+Timestamp: Thu Jul 31 23:42:34 2025
+Parse Time: 11658 microseconds
+Parse Time (ms): 11.658 ms
+Initial Memory: 3328 KB
+Peak Memory: 3968 KB
+Memory Used: 640 KB
+Peak CPU Usage: 83.7968%
+Average CPU Usage: 41.8984%
+CPU Samples: 2
+--- Test Validity Metrics ---
+Parsing Method: JSON Parse
+JSON Jobs Parsed: 10
+JSON Objects Processed: 31
+Successful Parsing: YES
+JSON File Size: 3185 bytes
+Test Duration: 11.658 ms
+Memory Measurement: /proc/self/status (UNIFIED)
+CPU Measurement: clock() current process (UNIFIED)
+----------------------------------------
+=== nanoCron Unified Parse Test Metrics (UNIFIED) ===
+Timestamp: Thu Jul 31 23:42:36 2025
+Parse Time: 8663 microseconds
+Parse Time (ms): 8.663 ms
+Initial Memory: 3328 KB
+Peak Memory: 3712 KB
+Memory Used: 384 KB
+Peak CPU Usage: 0%
+Average CPU Usage: 0%
+CPU Samples: 1
+--- Test Validity Metrics ---
+Parsing Method: JSON Parse
+JSON Jobs Parsed: 10
+JSON Objects Processed: 31
+Successful Parsing: YES
+JSON File Size: 3185 bytes
+Test Duration: 8.663 ms
+Memory Measurement: /proc/self/status (UNIFIED)
+CPU Measurement: clock() current process (UNIFIED)
+----------------------------------------
+=== nanoCron Unified Parse Test Metrics (UNIFIED) ===
+Timestamp: Thu Jul 31 23:42:38 2025
+Parse Time: 10185 microseconds
+Parse Time (ms): 10.185 ms
+Initial Memory: 3328 KB
+Peak Memory: 3840 KB
+Memory Used: 512 KB
+Peak CPU Usage: 0%
+Average CPU Usage: 0%
+CPU Samples: 1
+--- Test Validity Metrics ---
+Parsing Method: JSON Parse
+JSON Jobs Parsed: 10
+JSON Objects Processed: 31
+Successful Parsing: YES
+JSON File Size: 3185 bytes
+Test Duration: 10.185 ms
+Memory Measurement: /proc/self/status (UNIFIED)
+CPU Measurement: clock() current process (UNIFIED)
+----------------------------------------

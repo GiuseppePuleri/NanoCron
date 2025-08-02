@@ -1,0 +1,124 @@
+{
+  "jobs": [
+    {
+      "command": "/home/giuseppe/code/NanoCron-v3/init/jobs/makeD1",
+      "conditions": {},
+      "description": "Make dir every minute",
+      "schedule": {
+        "day_of_month": "*",
+        "day_of_week": "*",
+        "hour": "*",
+        "minute": "*",
+        "month": "*"
+      }
+    },
+    {
+      "command": "/home/giuseppe/code/NanoCron-v3/init/jobs/makeD2",
+      "conditions": {},
+      "description": "Make dir every minute",
+      "schedule": {
+        "day_of_month": "*",
+        "day_of_week": "*",
+        "hour": "*",
+        "minute": "*",
+        "month": "*"
+      }
+    },
+    {
+      "command": "/home/giuseppe/code/NanoCron-v3/init/jobs/makeD3",
+      "conditions": {},
+      "description": "Make dir every minute",
+      "schedule": {
+        "day_of_month": "*",
+        "day_of_week": "*",
+        "hour": "*",
+        "minute": "*",
+        "month": "*"
+      }
+    },
+    {
+      "command": "/home/giuseppe/code/NanoCron-v3/init/jobs/makeD4",
+      "conditions": {},
+      "description": "Make dir every minute",
+      "schedule": {
+        "day_of_month": "*",
+        "day_of_week": "*",
+        "hour": "*",
+        "minute": "*",
+        "month": "*"
+      }
+    },
+    {
+      "command": "/home/giuseppe/code/NanoCron-v3/init/jobs/makeD5",
+      "conditions": {},
+      "description": "Make dir every minute",
+      "schedule": {
+        "day_of_month": "*",
+        "day_of_week": "*",
+        "hour": "*",
+        "minute": "*",
+        "month": "*"
+      }
+    },
+    {
+      "command": "/home/giuseppe/code/NanoCron-v3/init/jobs/makeD6",
+      "conditions": {},
+      "description": "Make dir every minute",
+      "schedule": {
+        "day_of_month": "*",
+        "day_of_week": "*",
+        "hour": "*",
+        "minute": "*",
+        "month": "*"
+      }
+    },
+    {
+      "command": "/home/giuseppe/code/NanoCron-v3/init/jobs/makeD7",
+      "conditions": {},
+      "description": "Make dir every minute",
+      "schedule": {
+        "day_of_month": "*",
+        "day_of_week": "*",
+        "hour": "*",
+        "minute": "*",
+        "month": "*"
+      }
+    },
+    {
+      "command": "/home/giuseppe/code/NanoCron-v3/init/jobs/makeD8",
+      "conditions": {},
+      "description": "Make dir every minute",
+      "schedule": {
+        "day_of_month": "*",
+        "day_of_week": "*",
+        "hour": "*",
+        "minute": "*",
+        "month": "*"
+      }
+    },
+    {
+      "command": "/home/giuseppe/code/NanoCron-v3/init/jobs/makeD9",
+      "conditions": {},
+      "description": "Make dir every minute",
+      "schedule": {
+        "day_of_month": "*",
+        "day_of_week": "*",
+        "hour": "*",
+        "minute": "*",
+        "month": "*"
+      }
+    },
+    {
+      "command": "/home/giuseppe/code/NanoCron-v3/init/jobs/makeD10",
+      "conditions": {},
+      "description": "Make dir every minute",
+      "schedule": {
+        "day_of_month": "*",
+        "day_of_week": "*",
+        "hour": "*",
+        "minute": "*",
+        "month": "*"
+      }
+    }
+  ]
+}

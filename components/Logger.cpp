@@ -6,11 +6,12 @@
 #include <filesystem>
 
 Logger::Logger(const std::string& filename) : log_file(filename), silent_mode(false) {
-    // Create logs directory
+    // Create parent directory of the log file
     try {
-        std::filesystem::create_directories("logs");
+        std::filesystem::path log_path(filename);
+        std::filesystem::create_directories(log_path.parent_path());
     } catch (const std::exception& e) {
-        std::cerr << "WARNING: Cannot create logs directory: " << e.what() << std::endl;
+        std::cerr << "WARNING: Cannot create log directory: " << e.what() << std::endl;
     }
     
     // Open log file in append mode
