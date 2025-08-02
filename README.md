@@ -45,24 +45,15 @@ NanoCron is implemented in modern C++ (C++17) with an emphasis on safety, effici
 
 1. Clone the repository:
 
-   ```bash
-   git clone https://github.com/GiuseppePuleri/NanoCron.git
-   cd NanoCron
-   ```
-
-2. Make the install script executable and run it with sudo:
-
-   ```bash
-   chmod +x init/install.sh
-   sudo ./init/install.sh
-   ```
-
-3. After installation, start the CLI interface with:
-
-   ```bash
-   nanoCronCLI
-   ```
-
+```bash
+git clone https://github.com/GiuseppePuleri/NanoCron.git && \
+cd NanoCron && \
+chmod +x init/install.sh && \
+sudo ./init/install.sh
+```
+```bash
+nanoCronCLI
+```
 ---
 
 ## Usage
