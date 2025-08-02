@@ -1,16 +1,24 @@
 {
   "jobs": [
     {
-      "command": "/home/giuseppe/code/NanoCron-v3/init/jobs/makeD",
-      "conditions": {},
-      "description": "Make dir every minute",
+      "description": "Example job",
+      "command": "/opt/db/maintenance.sh --optimize",
       "schedule": {
+        "minute": "0",
+        "hour": "3",
         "day_of_month": "*",
-        "day_of_week": "*",
-        "hour": "*",
-        "minute": "*",
-        "month": "*"
+        "month": "*",
+        "day_of_week": "6"
+      },
+      "conditions": {
+        "cpu": "<70%",
+        "ram": "<85%",
+        "loadavg": "<2.5",
+        "disk": {
+          "/var/lib/mysql": "<80%"
+        }
       }
+    },
     }
   ]
 }
