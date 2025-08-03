@@ -29,6 +29,8 @@
 - Advanced logging: Thread-safe logging system with auto-rotation
 - System monitoring: Checks system conditions (CPU, RAM, disk)
 
+---
+
 - Website: https://nanocron.puleri.it
 - Video Tutorial:
 
