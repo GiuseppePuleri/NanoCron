@@ -21,7 +21,13 @@
 
 **NanoCron** is a high-performance, modular cron daemon designed specifically for modern Linux systems. It extends the traditional cron concept with real-time configuration reloads, rich logging, system-aware job scheduling, and an interactive CLI — all without requiring daemon restarts.
 
-NanoCron is implemented in modern C++ (C++17) with an emphasis on safety, efficiency, and extensibility.
+- JSON configuration: Uses a JSON file for configuration instead of crontab
+- JSON in memory: Jobs are loaded once from a file and stored in memory (RAM).
+- Modern daemon: Written in C++ with modular architecture
+- Auto-reload: Automatically reloads configuration without restart
+- Interactive CLI: User-friendly command-line interface with color output
+- Advanced logging: Thread-safe logging system with auto-rotation
+- System monitoring: Checks system conditions (CPU, RAM, disk)
 
 - Website: https://nanocron.puleri.it
 - Video Tutorial:
