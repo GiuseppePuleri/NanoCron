@@ -32,7 +32,7 @@
 ---
 
 - Website: https://nanocron.puleri.it
-- Video Tutorial:
+- Video Tutorial: https://nanocron.puleri.it/nanocron_video.mp4
 
 ---
 
