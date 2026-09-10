@@ -566,7 +566,9 @@ void getStat() {
         
         // Display detailed process information excluding CLI instance
         std::string psCmd = "ps aux | grep nanoCron | grep -v nanoCronCLI | grep -v grep | head -1";
-        system(psCmd.c_str());
+        if (system(psCmd.c_str()) != 0) {
+            printWarning("Could not retrieve process details.");
+        }
     } else {
         printWarning("nanoCron daemon is NOT running.");
     }
@@ -747,8 +749,10 @@ void stopDaemon() {
      * 3. SIGKILL (forced) - if graceful shutdown fails
      */
     std::string cmd = "kill -TERM " + std::to_string(pid);
-    int result = system(cmd.c_str());
-    
+    if (system(cmd.c_str()) != 0) {
+        printWarning("Could not send SIGTERM (process may already have exited).");
+    }
+
     // Allow time for graceful shutdown processing
     std::this_thread::sleep_for(std::chrono::seconds(2));
     
@@ -758,7 +762,9 @@ void stopDaemon() {
     } else {
         printInfo("Daemon still running, trying SIGKILL...");
         cmd = "kill -KILL " + std::to_string(pid);
-        system(cmd.c_str());
+        if (system(cmd.c_str()) != 0) {
+            printWarning("Could not send SIGKILL (process may already have exited).");
+        }
         
         std::this_thread::sleep_for(std::chrono::seconds(1));
         
