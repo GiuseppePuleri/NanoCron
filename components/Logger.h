@@ -8,7 +8,7 @@
 
 /**
  * Logger Class - Thread-Safe Logging System
- * 
+ *
  * Manages all system logging with file and console output,
  * automatic log rotation, and multiple logging levels.
  */
@@ -17,30 +17,34 @@ private:
     std::string log_file;
     std::ofstream log_stream;
     std::mutex log_mutex;
-    bool silent_mode;  // New: controls console output
-    
+    bool silent_mode;
+
     std::string get_timestamp();
     std::string get_level_string(LogLevel level);
-    
+
+    /**
+     * Formats and writes a single log entry. Caller must already hold
+     * log_mutex (see Logger.cpp for why this exists as a separate method).
+     */
+    void write_entry_locked(LogLevel level, const std::string& message, const std::string& job_name);
+
 public:
     Logger(const std::string& filename = "logs/cron.log");
     ~Logger();
-    
-    // New: control console output
+
     void setSilentMode(bool silent);
     bool isSilentMode() const;
-    
-    // Main logging method
+
     void log(LogLevel level, const std::string& message, const std::string& job_name = "");
-    
-    // Convenience methods for different log levels
+
     void debug(const std::string& message, const std::string& job_name = "");
     void info(const std::string& message, const std::string& job_name = "");
     void warning(const std::string& message, const std::string& job_name = "");
     void error(const std::string& message, const std::string& job_name = "");
     void success(const std::string& message, const std::string& job_name = "");
-    
-    // Log rotation functionality
+
+    // Closes the current log file, renames it to a dated archive, and
+    // opens a fresh log file in its place.
     void rotate_logs();
 };
 

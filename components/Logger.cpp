@@ -1,3 +1,8 @@
+/**
+ * @file Logger.cpp
+ * @brief Thread-safe logging system with console + file output and log rotation.
+ */
+
 #include "Logger.h"
 #include <iostream>
 #include <chrono>
@@ -6,17 +11,14 @@
 #include <filesystem>
 
 Logger::Logger(const std::string& filename) : log_file(filename), silent_mode(false) {
-    // Create parent directory of the log file
     try {
         std::filesystem::path log_path(filename);
         std::filesystem::create_directories(log_path.parent_path());
     } catch (const std::exception& e) {
         std::cerr << "WARNING: Cannot create log directory: " << e.what() << std::endl;
     }
-    
-    // Open log file in append mode
+
     log_stream.open(log_file, std::ios::app);
-    
     if (!log_stream.is_open()) {
         std::cerr << "FATAL: Cannot open log file: " << log_file << std::endl;
     }
@@ -32,10 +34,10 @@ Logger::~Logger() {
 std::string Logger::get_timestamp() {
     auto now = std::chrono::system_clock::now();
     auto time_t = std::chrono::system_clock::to_time_t(now);
-    
+
     auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(
         now.time_since_epoch()) % 1000;
-    
+
     std::stringstream ss;
     ss << std::put_time(std::localtime(&time_t), "%Y-%m-%d %H:%M:%S");
     ss << "." << std::setfill('0') << std::setw(3) << ms.count();
@@ -43,7 +45,7 @@ std::string Logger::get_timestamp() {
 }
 
 std::string Logger::get_level_string(LogLevel level) {
-    switch(level) {
+    switch (level) {
         case LogLevel::DEBUG:   return "DEBUG";
         case LogLevel::INFO:    return "INFO";
         case LogLevel::WARNING: return "WARN";
@@ -64,23 +66,31 @@ bool Logger::isSilentMode() const {
 
 void Logger::log(LogLevel level, const std::string& message, const std::string& job_name) {
     std::lock_guard<std::mutex> lock(log_mutex);
-    
+    write_entry_locked(level, message, job_name);
+}
+
+/**
+ * Actually formats and writes a log entry. Callers MUST already hold
+ * log_mutex. This exists so rotate_logs() can write its own "log rotated"
+ * message without releasing and re-acquiring the lock via log()/info() -
+ * std::mutex is not recursive, so calling log() again while already
+ * holding log_mutex would deadlock the process.
+ */
+void Logger::write_entry_locked(LogLevel level, const std::string& message, const std::string& job_name) {
     std::string timestamp = get_timestamp();
     std::string level_str = get_level_string(level);
-    
+
     std::string log_entry = "[" + timestamp + "] [" + level_str + "]";
     if (!job_name.empty()) {
         log_entry += " [" + job_name + "]";
     }
     log_entry += " " + message;
-    
-    // Always write to file
+
     if (log_stream.is_open()) {
         log_stream << log_entry << std::endl;
         log_stream.flush();
     }
-    
-    // Write to console only if not in silent mode
+
     if (!silent_mode) {
         std::cout << log_entry << std::endl;
     }
@@ -108,29 +118,32 @@ void Logger::success(const std::string& message, const std::string& job_name) {
 
 void Logger::rotate_logs() {
     std::lock_guard<std::mutex> lock(log_mutex);
-    
+
     if (log_stream.is_open()) {
         log_stream.close();
     }
-    
+
     auto now = std::chrono::system_clock::now();
     auto time_t = std::chrono::system_clock::to_time_t(now);
     auto local = std::localtime(&time_t);
-    
+
     std::stringstream archive_name;
-    archive_name << "logs/cron_" 
+    archive_name << "logs/cron_"
                 << (local->tm_year + 1900) << "-"
                 << std::setfill('0') << std::setw(2) << (local->tm_mon + 1) << "-"
                 << std::setfill('0') << std::setw(2) << local->tm_mday << ".log";
-    
+
     try {
         std::filesystem::rename(log_file, archive_name.str());
     } catch (const std::exception& e) {
         std::cerr << "Error rotating log: " << e.what() << std::endl;
     }
-    
+
     log_stream.open(log_file, std::ios::app);
     if (log_stream.is_open()) {
-        info("Log rotated. Archive: " + archive_name.str());
+        // Write directly (write_entry_locked), NOT via info(): we're still
+        // holding log_mutex here and log()/info() would try to lock it
+        // again, which deadlocks since std::mutex isn't recursive.
+        write_entry_locked(LogLevel::INFO, "Log rotated. Archive: " + archive_name.str(), "");
     }
 }
